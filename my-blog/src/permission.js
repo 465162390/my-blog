@@ -5,7 +5,7 @@ import store from './store'
 import { Message } from 'element-ui'
 
 // 配置白名单，不用登录的路由
-const whiteList = ['/']
+const whiteList = ['/','/index']
 
 // 路由全局前置守卫，判断是否登录跳转到相应页面
 router.beforeEach((to, from, next) => {
@@ -16,7 +16,7 @@ router.beforeEach((to, from, next) => {
       next();
     } else {
       next({
-        path: '/'
+        path: '/index'
       })
       Message({
         type: "error",

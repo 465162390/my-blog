@@ -253,11 +253,6 @@ export default {
 </script>
 
 <style scoped>
-.pagination {
-  float: right;
-  margin-top: 12px;
-}
-
 /** 登录框按钮 **/
 .login-btn {
   display: block;

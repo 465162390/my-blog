@@ -21,7 +21,7 @@ require_once '../../vendor/gethtml/simple_html_dom.php';
     }
 
     $ip = getip();
-    $url = "http://ip.tool.chinaz.com/".$ip;
+    $url = "https://www.hao7188.com/ip/" . $ip .".html";
 
     // 获取该网址的内容
     $html = file_get_html($url);
@@ -29,13 +29,13 @@ require_once '../../vendor/gethtml/simple_html_dom.php';
     $status = new stdClass();
 
     // 获取该网址指定内容
-    foreach($html -> find('div .IpMainWrap-Left .IcpMain02 .WhoIpWrap .bor-b1s span') as $element) {
+    foreach($html -> find('table tr td') as $element) {
         array_push($arr, $element);
     }
 
-    $info = explode('>', explode(' ', $arr[3])[2])[1];   // 获取到省市
-    $province = explode('省', $info)[0] . "省";
-    $city = explode('省', $info)[1];
+    $info = str_replace(' ', '', explode('国', $arr[3]));   // 获取到省市区，并清楚空格
+    $province = explode('省', $info[1])[0] . "省";
+    $city = explode('市', explode('省', $info[1])[1])[0] . "市";
     $status -> code = 200;
     $status -> message = "success";
     $status -> city = $city;

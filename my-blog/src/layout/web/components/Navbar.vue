@@ -17,7 +17,7 @@
       <el-col :xs="24" :sm="24" :md="19" :lg="19" :xl="19">
         <el-menu router :default-active="$route.path" class="el-menu" mode="horizontal">
 
-          <!-- 窗口小于700px显示的标题和菜单按钮 -->
+          <!-- 屏幕窗口 < 700px -->
           <div class="mobile">
             <!-- 标题 -->
             <span class="mobile-title">NGKAKUI的博客</span>
@@ -347,13 +347,9 @@ form {
   min-height: 260px;
   transition: .05s;
 }
-
 .el-menu--collapse {
   display: none;
 }
-
-
-
 
 /** 登录框按钮 **/
 .login-btn {
@@ -374,7 +370,7 @@ form {
   }
 }
 
-@media (max-width: 699px) {
+@media (max-width: 730px) {
   .btn-group {
     display: none
   }

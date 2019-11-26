@@ -1,0 +1,163 @@
+.center {
+  width: calc(100% - 300px);
+}
+.right {
+  position: fixed;
+  top: 93px;
+  right: 30px;
+  width: 250px;
+}
+.article-header {
+  text-align: center;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #e8e8e8;
+}
+.article-title {
+  color: #0d1a26;
+  font-size: 1.5em;
+  font-weight: 400;
+  margin-top: 0;
+}
+.article-desc {
+  color: #555;
+}
+.article-desc font {
+  font-size: 0.8em;
+  vertical-align: 1px;
+}
+
+/* 右边栏 */
+.title li span {
+  display: block;
+  border-radius: 5px;
+  padding: 8px 0 8px 5px;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #8590a6;
+  font-size: 14px;
+}
+.title li span:hover {
+  color: #40a9ff; 
+  background: #f0f2f5;
+} 
+ul {
+  padding: 0;
+  list-style: none;
+}
+a {
+  text-decoration: none;
+}
+/* 右边栏 */
+
+/* 留言 */
+.tip {
+  font-size: 15px;
+  margin-right: 15px;
+  color: #6190e8;
+}
+.comments-header {
+  margin-top: 20px;
+}
+.comments-count {
+  color: #40a9ff;
+  margin-right: 5px;
+}
+.comments-list {
+  margin-top: 20px;
+}
+.comment:last-child {
+  margin-bottom: 30px;
+}
+.comment:last-child .el-divider {
+  display: none;
+}
+.avatar {
+  display: inline-block;
+  position: relative;
+}
+.avatar img {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  margin-bottom: 0px;
+}
+.author {
+  width: 100%;
+  display: inline;
+  margin-left: 10px;
+  color: rgba(0, 0, 0, 0.45);
+  font-size: 15px;
+}
+.comment-time {
+  vertical-align: 13px;
+  margin-left: 15px;
+}
+.comment-content {
+  display: block;
+  color: #555555;
+  padding: 10px 15px
+}
+.comment-btn {
+  display: block;
+  margin-left: 55px;
+  float: right;
+}
+
+/* 留言 */
+
+@media (max-width: 1350px) {
+  .right {
+    display: none;
+  }
+  .center {
+    width: 100%;
+  }
+  .editormd-html-preview, .editormd-preview-container {
+    padding: 20px 0px;
+  }
+  .article-main {
+    padding: 0px 15px;
+  }
+  .article-comments {
+    padding: 0px 15px;
+  }
+  .comments-list {
+    padding: 0px 15px;
+  }
+}
+
+@media (max-width: 600px) { 
+  .post-time {
+    display: block;
+    margin-bottom: 5px;
+  }
+  .article-main {
+    padding: 0px 5px;
+  }
+  .article-comments {
+    padding: 0px 5px;
+  }
+  .comments-list {
+    padding: 0px 5px;
+  }
+  .comment:last-child {
+    margin-bottom: 0px;
+  }
+  .editormd-html-preview, .editormd-preview-container {
+    padding: 10px 0px;
+  }
+  .el-divider--horizontal {
+    margin: 3px;
+  }
+}
+
+@media (max-width: 450px) {
+  .article-title {
+    font-size: 1.3em;
+  }
+  .tip {
+    font-size: 13px;
+  }
+}

@@ -1,9 +1,9 @@
 <!-- 后台layout布局 -->
 <template>
   <div style="background:#f0f2f5;">
-    <navbar @showCollapse="showCollapse" />
+    <navbar/>
     <div class="container">
-      <sidebar :class="sideClass" :isCollapse="isCollapse"></sidebar>
+      <sidebar :class="sideClass"></sidebar>
       <app-main :class="mainClass"></app-main>
     </div>
   </div>
@@ -17,11 +17,7 @@ import AppMain from './components/AppMain'
 export default {
   name: 'Layout',
   data () {
-    return {
-      isCollapse: false,
-      sideClass: "app-sidebar",
-      mainClass: "app-main"
-    };
+    return {};
   },
 
   created() {},
@@ -32,58 +28,31 @@ export default {
     AppMain
   },
 
-  computed: {},
-
-  methods: {
-    // 侧边栏收展
-    showCollapse(collapse) {
-      this.isCollapse = collapse
-      if(collapse == true) {
-        this.sideClass = "app-sidebar-hidden"
-        this.mainClass = "app-main-hidden"
-      } else {
-        this.sideClass = "app-sidebar"
-        this.mainClass = "app-main"
-      }
+  computed: {
+    isCollapse() {
+      return this.$store.state.isCollapse
+    },
+    sideClass() {
+      let collapse
+      this.isCollapse == true ? collapse = "app-sidebar-hidden" : collapse = "app-sidebar" 
+      return collapse
+    },
+    mainClass() {
+      let collapse
+      this.isCollapse == true ? collapse = "app-main-hidden" : collapse = "app-main"
+      return collapse 
     }
-  }
+  },
+  methods: {}
 }
 
 </script>
-<style scoped>
-.container {
-  display: flex;
-  flex-direction: row;
-  flex: 1;  
-  width: 100%
-}
+<style src="./index.css" scoped></style>
 
-.app-sidebar {
-  width: 240px;
-  height: calc(100vh - 65px);
-  margin-top: -4px;
-}
-.app-sidebar-hidden {
-  transition: .5s;
-  width: 65px;
-  height: calc(100vh - 65px);
-  margin-top: -4px;
-}
-
-.app-main {
-  padding: 20px;
-  margin: 15px;
-  width: calc(100% - 240px);
-  background: white;
-  overflow: auto;
-  height: calc(100vh - 100px);
-}
-.app-main-hidden {
-  padding: 20px;
-  margin: 15px;
-  width: calc(100% - 65px);
-  background: white;
-  overflow: auto;
-  height: calc(100vh - 100px);
+<style>
+.pagination {
+  margin-top: 18px;
+  float: right;
+  margin-bottom: 15px;
 }
 </style>

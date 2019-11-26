@@ -109,7 +109,7 @@
       </ul>
     </div>
 
-    <!-- 没有文章显示 -->
+    <!-- 没有文章 -->
     <div v-if="showEmpty" class="empty">
       <svg
         t="1573189019339"
@@ -181,11 +181,10 @@
 import Pagination from "@/components/Pagination";
 import LeftDrawer from "@/components/LeftDrawer";
 import RightDrawer from "@/components/RightDrawer";
-// import { getAddressInfo } from "@/api/ipInfo";
-import { getIpInfo } from "@/api/ipInfo";
-import { fetchArticle } from "@/api/article";
 import ArticleView from "@/components/ArticleView";
-import { Loading, Backtop } from "element-ui";
+import { getIpInfo } from "@/api/ipInfo";
+// import { getAddressInfo } from "@/api/ipInfo";
+import { fetchArticle } from "@/api/article";
 
 export default {
   name: "Home",
@@ -240,9 +239,7 @@ export default {
         this.search.title = this.$route.query.title;
       }
       fetchArticle(this.search).then(response => {
-        response.data.length == 0
-          ? (this.showEmpty = true)
-          : (this.showEmpty = false);
+        response.data.length == 0 ? this.showEmpty = true : this.showEmpty = false;
         this.total = response.total;
         this.articles = response.data;
         // 文章列表
@@ -275,153 +272,7 @@ export default {
 };
 </script>
 
-<style scoped>
-.center {
-  width: calc(100% - 300px);
-}
-.right {
-  position: fixed;
-  top: 98px;
-  right: 30px;
-  width: 250px;
-}
-ul {
-  padding: 0;
-  list-style: none;
-}
-a {
-  text-decoration: none;
-}
-.article-list-item {
-  border: 1px solid #ebedf0;
-  padding: 16px 24px;
-  margin-bottom: 15px;
-  -webkit-transition: all 0.2s linear;
-  transition: all 0.2s linear;
-}
-.article-list-item a {
-  color: #555;
-}
-.article-list-item:hover {
-  background: #effbff;
-  box-shadow: 0 15px 30px 0 rgba(0, 0, 0, 0.1);
-  -webkit-transform: translate3d(0, -5px 0);
-  transform: translate3d(0, -5px 0);
-}
-.article-list-item:hover .el-divider__text {
-  background: #effbff;
-}
-.article-list-item:hover .title {
-  color: #48b2ff;
-}
-.article-list-item:hover .article-view {
-  background: #effbff;
-}
-.article-title {
-  text-align: center;
-}
-.el-divider__text.is-left {
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  width: calc(100% - 55px);
-}
-.article-title .title {
-  color: #394d69;
-  font-size: 1.4rem;
-  font-weight: 600;
-  line-height: 1.2;
-  cursor: pointer;
-}
-.article-title .post-time {
-  font-size: 0.9em;
-  padding-left: 20px;
-}
-.article-content {
-  cursor: pointer;
-  max-height: 260px;
-  overflow: hidden;
-}
-.article-footer {
-  vertical-align: middle;
-  margin-top: 10px;
-  color: rgba(0, 0, 0, 0.45);
-  /* font-size: 1px; */
-}
-.article-pagination {
-  float: right;
-  margin: 30px 0;
-}
-.el-pagination {
-  font-weight: 500;
-}
-.title li span {
-  display: block;
-  border-radius: 5px;
-  padding: 8px 0 8px 5px;
-  cursor: pointer;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  color: #8590a6;
-  font-size: 14px;
-}
-.title li span:hover {
-  color: #40a9ff;
-  background: #f0f2f5;
-}
-.empty {
-  margin-top: 50px;
-  text-align: center;
-}
-.empty-text {
-  margin: 0 8px;
-  font-size: 18px;
-  font-weight: 700;
-  color: red;
-}
-.drawer {
-  display: none;
-  position: fixed;
-  top: 90px;
-  /* -webkit-box-shadow: 2px 0 8px rgba(0, 0, 0.2, 0.3); */
-  box-shadow: 2px 0 8px rgba(0, 0, 0, .3);
-  width: 42px;
-  height: 42px;
-  text-align: center;
-  line-height: 45px;
-  background: #fff;
-}
-
-@media (max-width: 1240px) {
-  .right {
-    display: none;
-  }
-  .center {
-    width: 100%;
-  }
-  .rightD {
-    display: block;
-    right: -1px;
-    border-radius: 4px 0 0 4px;
-  }
-}
-
-@media (max-width: 991px) {
-  .leftD {
-    display: block;
-    left: -1px;
-    border-radius: 0 4px 4px 0;
-  }
-}
-
-@media (max-width: 321px) {
-  .article-pagination {
-    margin: 30px -22px 30px 0px;
-  }
-}
-</style>
-
+<style src="./index.css" scoped></style>
 <style>
 .editormd-html-preview code {
   color: red;

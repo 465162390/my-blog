@@ -1,6 +1,7 @@
 import request from '@/utils/request'
 
 // 根据ip获取用户地址信息
+// https://api.skk.moe/network/parseIp/ipip/v3/219.128.85.132
 export function getAddressInfo() {
   return request.post('http://ip-api.com/json/?lang=zh-CN')
 }

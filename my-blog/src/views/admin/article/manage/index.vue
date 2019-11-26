@@ -30,29 +30,33 @@
         <el-table-column prop="title" label="文章标题" align="center" width="300;"></el-table-column>
         <el-table-column prop="tag" label="标签" align="center">
           <template slot-scope="scope">
-            <el-tag 
-              style="margin:0px 5px;" 
-              size="mini"
-              effect="light" 
-              :hit="true" 
-              :type="type[Math.floor(Math.random()*5 + 1)]" 
-              v-for="tag in scope.row.tags"
-              :key="tag.id">
-            {{tag.name}}
-            </el-tag>
+            <div style="width: 100%; overflow: hidden; text-overflow: ellipsis;">
+              <el-tag 
+                style="margin:0px 5px;" 
+                size="mini"
+                effect="light" 
+                :hit="true" 
+                :type="type[Math.floor(Math.random()*5 + 1)]" 
+                v-for="tag in scope.row.tags"
+                :key="tag.id">
+              {{tag.name}}
+              </el-tag>
+            </div>
           </template>
         </el-table-column>
         <el-table-column prop="category" label="分类" align="center">
           <template slot-scope="scope">
-            <el-tag 
-              style="margin-left: 5px;" 
-              size="mini"
-              effect="dark" 
-              :hit="true"
-              v-for="tag in scope.row.categories"
-              :key="tag.id">
-            {{tag.name}}
-            </el-tag>
+            <div style="width: 100%; overflow: hidden; text-overflow: ellipsis;">
+              <el-tag 
+                style="margin-left: 5px;" 
+                size="mini"
+                effect="dark" 
+                :hit="true"
+                v-for="tag in scope.row.categories"
+                :key="tag.id">
+              {{tag.name}}
+              </el-tag>
+            </div>
           </template>
         </el-table-column>
         <el-table-column prop="viewCount" label="浏览数" sortable align="center" width="100"></el-table-column>
@@ -186,12 +190,5 @@ export default {
   }
 };
 </script>
-<style scoped>
-.el-divider--horizontal {
-  margin: 5px 0;
-}
-.pagination {
-  margin-top: 18px;
-  float: right;
-}
-</style>
+
+<style src="./index.css" scoped></style>

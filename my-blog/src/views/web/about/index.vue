@@ -77,43 +77,7 @@ export default {
 }
 
 </script>
-<style scoped>
-.sub-title {
-  margin-left: 10px;
-  font-size: 14px;
-}
-.el-divider {
-  padding: 5px 0;
-  margin: 20px 0;
-}
-a {
-  color: #1890ff;
-  text-decoration: none;
-}
-.about-list {
-  font-size: 14px;
-  color: #555;
-  padding: 5px 0 0 16px;
-  list-style: circle;
-}
-li {
-  margin-bottom: 16px;
-}
-.line {
-  margin: 0 10px;
-  padding: 0;
-}
-svg {
-  vertical-align: sub;
-}
-.about-list ul {
-  margin: 14px 0;
-}
-.star {
-  display: inline-block;
-  vertical-align: 2px;
-}
-</style>
+<style src="./index.css" scoped></style>
 
 <style>
 .el-icon-star-on {

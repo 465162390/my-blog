@@ -96,56 +96,5 @@ export default {
   }
 };
 </script>
-<style scoped>
-.archives {
-  margin-left: -35px;
-  padding: 20px 30px 20px 0;
-}
-.title {
-  font-size: 20px;
-  font-weight: 550;
-  position: relative;
-  top: -4px;
-}
-.font {
-  margin-left: 3px;
-  cursor: pointer;
-  font-size: 15px;
-  color: #40a9ff;
-  vertical-align: 3px;
-}
-.search {
-  text-align: center;
-  color: #3c4858;
-  font-size: 1.5rem;
-  font-weight: 400;
-  text-align: center;
-}
-.pagination {
-  float: right;
-}
-a {
-  text-decoration: none
-}
 
-@media (max-width: 992px) {
-  .archives {
-    padding: 0px 0px 30px 35px;
-  }
-}
-
-@media (max-width: 450px) {
-  .title {
-    font-size: 17px;
-  }
-  .font {
-    font-size: 13px;
-  }
-  .el-timeline {
-    padding-left: 10px;
-  }
-  .search {
-    font-size: 1.2em;
-  }
-}
-</style>
+<style src="./index.css" scoped></style>

@@ -17,6 +17,9 @@ const store = new Vuex.Store({
     // 标签/分类
     tags: [],
 
+    // 后台侧边栏的收展
+    isCollapse: true,
+
   },
 
   mutations: {
@@ -35,6 +38,10 @@ const store = new Vuex.Store({
     // 标签/分类
     changeTags(state, params) {
       state.tags = params;
+    },
+    // 侧边栏收展
+    changeCollapse(state, params) {
+      state.isCollapse = params;
     }
   }
 

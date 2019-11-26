@@ -1,0 +1,50 @@
+.box {
+  background: aliceblue;
+  width: 80%;
+  margin: 40px auto;
+  padding: 5px 30px 20px 30px;
+  border-radius: 10px;
+  box-shadow: 0 5px 6px rgba(0, 0, 0, 0.2)
+}
+.tags-text {
+  color: #3c4858;
+  font-size: 1.5rem;
+  font-weight: 400;
+  text-align: center;
+}
+.tag-group {
+  width: 75%;
+  margin: 0 auto;
+  text-align: center;
+}
+.el-tag {
+  margin: 12px;
+}
+.el-tag >>> .el-badge__content.is-fixed {
+  top: -3px;
+  right: 2px;
+}
+.el-badge {
+  vertical-align: baseline;
+}
+
+@media (max-width: 450px) {
+  .box {
+    width: 60%;
+    margin: 20px auto;
+    padding: 5px 10px 10px 10px;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    background: white;
+  }
+  .tags-text {
+    font-size: 1.1rem;
+  }
+  .tags-text svg {
+    width: 25px;
+    height: 25px;
+  }
+  .el-tag {
+    margin: 6px;
+  }
+}

@@ -121,9 +121,6 @@ export default {
   }
 };
 </script>
+
 <style scoped>
-.pagination {
-  float: right;
-  margin-top: 12px;
-}
 </style>
