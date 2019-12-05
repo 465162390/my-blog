@@ -3,12 +3,12 @@ import Layout from '@/Layout/web'
 
 
 export default {
-  path: '/index',
+  path: '/article',
   component: Layout,
   // meta: { title: '控房管理系统管理', icon: 'example' },
   children: [
     {
-      path: '/index',
+      path: '/article',
       name: '首页',
       component: () => import('@/views/web/home/index'),
     },
@@ -24,7 +24,7 @@ export default {
     },
     {
       path: '/categories',
-      name: '分类',
+      name: '分类、标签',
       component: () => import('@/views/web/categories/index'),
     },
     {
@@ -49,6 +49,7 @@ export default {
     },
     {
       path: '/404',
+      name: '404',
       component: () => import('@/views/404'),
     },
   ]

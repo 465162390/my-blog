@@ -173,7 +173,6 @@
 
     <!-- 右边抽屉 文章列表 -->
     <right-drawer :drawer="rightDrawer" @changeDrawer="changeDrawer" :titles="titles"/>
-
   </div>
 </template>
 
@@ -273,9 +272,13 @@ export default {
 </script>
 
 <style src="./index.css" scoped></style>
+
 <style>
-.editormd-html-preview code {
-  color: red;
+.article-content a {
+  text-decoration: none;
+}
+.article-content ul li {
+  list-style: circle;
 }
 *:focus {
   outline: 0px;

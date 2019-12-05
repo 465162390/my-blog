@@ -68,20 +68,32 @@
             <span class="comment-time">{{message.createdAt}}</span>
 
             <comment-view class="comment-content" v-if="message.content" :id="message.id" :message="message.content" v-highlight/>
-
-            <!-- <span class="comment-content">{{message.content}}</span> -->
-
             <!-- 回复、删除按钮 -->
             <span class="comment-btn">
               <!-- <el-button type="primary" icon="el-icon-s-comment" size="mini" @click="replyMessage(message)" circle></el-button> -->
-              <el-button
-                type="danger"
-                icon="el-icon-delete"
-                size="mini"
-                @click="deleteMessage(message.id)"
-                circle
-                v-if="$store.state.user.role == '1'"
-              ></el-button>
+              <el-popover
+                placement="top"
+                width="100"
+                trigger="click"
+                v-model="visible[message.id]">
+                <p>
+                  <i class="el-icon-question"></i> 
+                  <span style="margin-left: 5px;">确定删除吗？</span>
+                </p>
+                <div style="text-align: right; margin: 0">
+                  <el-button size="mini" @click="visible.splice(message.id, 1, false);">取消</el-button>
+                  <el-button type="primary" size="mini" @click="deleteMessage(message.id)">确定</el-button>
+                </div>
+                <el-button
+                  icon="el-icon-delete"
+                  slot="reference"
+                  type="danger"
+                  size="mini"
+                  @click="visible[message.id] = true"
+                  circle
+                  v-if="$store.state.user.role == '1'"
+                ></el-button>
+              </el-popover>
             </span>
             <el-divider style="margin: 10px 0;" direction="horizontal"></el-divider>
           </div>
@@ -156,7 +168,8 @@ export default {
         page: 1,
         pagesize: 10,
       },
-      total: 30,
+      total: 0,
+      visible: [],
     };
   },
 

@@ -21,7 +21,7 @@
       </el-menu-item>
       <el-submenu class="header-right show" index="1">
         <template slot="title"><font style="color: #409Eff; vertical-align: baseline">欢迎您，</font>{{this.$store.state.user.name}}</template>
-        <el-menu-item index="/index">返回主页</el-menu-item>
+        <el-menu-item index="/article">返回主页</el-menu-item>
         <el-menu-item @click="logout">退出登录</el-menu-item>
       </el-submenu>
       <el-avatar class="avatar show" :size="50" src="../../../../static/img/avatar.png"></el-avatar>
@@ -73,7 +73,7 @@ export default {
     logout() {
       logout();
       this.$store.state.user = "";
-      this.$router.push("/index");
+      this.$router.push("/article");
     }
   }
 };

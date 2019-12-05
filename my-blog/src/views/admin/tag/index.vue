@@ -13,13 +13,13 @@
       </el-form>
     </div>
 
-    <!-- 文章列表 -->
+    <!-- 标签列表 -->
     <div class="article-list">
       <el-table :data="tags" style="width: 100%" border>
         <el-table-column type="index" align="center" width="50"></el-table-column>
-        <el-table-column prop="name" label="标签名称" sortable align="center"></el-table-column>
+        <el-table-column prop="name" label="标签名称" align="center"></el-table-column>
         <el-table-column prop="num" label="文章数量" sortable align="center"></el-table-column>
-        <el-table-column prop="operation" label="操作" align="center" width="220">
+        <el-table-column prop="operation" label="操作" align="center" width="100">
           <template slot-scope="scope">
             <el-popover placement="top" width="100" trigger="click" v-model="visible[scope.row.id]">
               <p>
@@ -97,12 +97,14 @@ export default {
         this.total = response.total;
       })
     },
+    
     delTag(id) {
       this.$set(this.visible, id, false);  // 删除操作
       let params = {
         type: "tag",
         id: id,
       }
+
       delOther(params).then(response => {
         Message({
           message: response.message,
@@ -112,11 +114,15 @@ export default {
         this.onSearch();
       })
     },
+
     handleSizeChange(val) {
       this.search.pagesize = val
+      this.onSearch();
     },
+
     handleCurrentChange(val) {
       this.search.page = val
+      this.onSearch();
     },
   }
 };

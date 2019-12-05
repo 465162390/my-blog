@@ -19,6 +19,7 @@ export default new Router({
   routes: [
     {
       path: '/',
+      name: '往事随风',
       component: () => import('@/views/home'),
     },
     adminRouter,

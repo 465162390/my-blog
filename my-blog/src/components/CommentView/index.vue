@@ -1,8 +1,6 @@
 <!-- 评论/留言markdown语法显示组件 -->
 <template>
-  <div :id="'commentView'+this.id">
-    <textarea style="display: none" name="ceditormd" v-model="message"></textarea>
-  </div>
+  <div :id="'commentView-'+this.id"></div>
 </template>
 
 <script>
@@ -22,20 +20,15 @@ export default {
     }
   },
 
-  created() {
-    this.$nextTick(() => {
-      let commentView = editormd.markdownToHTML("commentView"+this.id, {
-        htmlDecode: "style,script,iframe",
-        emoji: true,
-        taskList: true,
-        tex: true, // 默认不解析
-        flowChart: true, // 默认不解析
-        sequenceDiagram: true // 默认不解析
-      });
+  created() {},
+
+  mounted() {
+    // this.Viewer(markdown编辑器,main.js全局引入)
+    const commentViewer = new this.Viewer({
+      el: document.querySelector(`#commentView-${this.id}`),
+      initialValue: this.message,
     });
   },
-
-  mounted() {},
 
   components: {},
 

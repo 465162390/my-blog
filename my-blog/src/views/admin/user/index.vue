@@ -21,11 +21,11 @@
     <div class="article-list">
       <el-table :data="users" style="width: 100%" border>
         <el-table-column type="index" align="center" width="50"></el-table-column>
-        <el-table-column prop="name" label="用户名称" sortable align="center"></el-table-column>
-        <el-table-column prop="username" label="账号" sortable align="center"></el-table-column>
-        <el-table-column prop="role" label="账号类别" sortable align="center"></el-table-column>
-        <el-table-column prop="createdAt" label="创建时间" sortable align="center"></el-table-column>
-        <el-table-column prop="operation" label="操作" align="center" width="220">
+        <el-table-column prop="name" label="用户名称" align="center"></el-table-column>
+        <el-table-column prop="username" label="账号" align="center"></el-table-column>
+        <el-table-column prop="role" label="账号类别" align="center"></el-table-column>
+        <el-table-column prop="createdAt" label="创建时间" sortable align="center" width="180"></el-table-column>
+        <el-table-column prop="operation" label="操作" align="center" width="160">
           <template slot-scope="scope">
             <el-popover placement="top" width="100" trigger="click" v-model="visible[scope.row.id]">
               <p>
@@ -48,7 +48,7 @@
               type="primary"
               size="small"
               style="margin-left: 10px;"
-              @click="fetchUser(scope.row.id)"
+              @click="showUser(scope.row.id)"
             >编辑</el-button>
           </template>
         </el-table-column>
@@ -73,10 +73,10 @@
       width="30%"
       :before-close="handleClose">
       <el-form :model="registerUser" ref="registerForm" label-width="120px" class="login-form" size="mini">
-        <el-form-item label="名称：" prop="name" required>
+        <el-form-item label="用户名称：" prop="name" required>
           <el-input v-model.trim="registerUser.name" placeholder="name" clearable></el-input>
         </el-form-item>
-        <el-form-item label="用户名：" prop="username" required>
+        <el-form-item label="登录账号：" prop="username" required>
           <el-input v-model.trim="registerUser.username" placeholder="username" clearable></el-input>
         </el-form-item>
         <el-form-item label="登录密码：" prop="password" required>
@@ -106,10 +106,10 @@
       width="30%"
       :before-close="handleClose">
       <el-form :model="editUser" ref="editForm" label-width="120px" class="login-form" size="mini">
-        <el-form-item label="名称：" prop="name">
+        <el-form-item label="用户名称：" prop="name">
           <el-input v-model.trim="editUser.name" placeholder="name" clearable></el-input>
         </el-form-item>
-        <el-form-item label="用户名：" prop="username">
+        <el-form-item label="登录账号：" prop="username">
           <el-input v-model.trim="editUser.username" placeholder="username" disabled clearable></el-input>
         </el-form-item>
         <el-form-item label="旧登录密码：" prop="oldpwd">
@@ -138,10 +138,10 @@
 <script>
 import Pagination from "@/components/Pagination"
 import { fetchUser } from '@/api/manage'
+import { fetchDetail } from '@/api/manage'
 import { delUser } from '@/api/manage'
 import { Message } from "element-ui"
 import { register } from "@/api/user";
-import { fetchDetail } from "@/api/manage";
 import { editUser } from "@/api/manage";
 
 export default {
@@ -185,6 +185,7 @@ export default {
         this.total = response.total;
       })
     },
+
     // 删除用户
     delUser(id) {
       delUser({id: id}).then(response => {
@@ -196,14 +197,17 @@ export default {
         this.onSearch();
       })
     },
+
     handleSizeChange(val) {
       this.search.pagesize = val
       this.onSearch();
     },
+
     handleCurrentChange(val) {
       this.search.page = val
       this.onSearch();
     },
+
     // 注册用户
     register() {
       if(this.registerUser.password == this.registerUser.confirmpwd) {
@@ -225,13 +229,15 @@ export default {
         })
       }
     },
-    // 请求用户
-    fetchUser(id) {
+
+    // 用户
+    showUser(id) {
       fetchDetail({id: id}).then(response => {
         this.editUser = response.data
         this.editVisible = true;
       })
     },
+
     // 修改用户
     handleEditUser() {
       editUser(this.editUser).then(response => {
@@ -244,6 +250,7 @@ export default {
         })
       })
     },
+
     handleClose(visible) {
       this.registerVisible = false;
       this.editVisible = false;

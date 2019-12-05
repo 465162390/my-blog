@@ -27,7 +27,7 @@
     <div class="article-list">
       <el-table :data="articles" style="width: 100%" border>
         <el-table-column type="index" align="center" width="50"></el-table-column>
-        <el-table-column prop="title" label="文章标题" align="center" width="300;"></el-table-column>
+        <el-table-column prop="title" label="文章标题" align="center" width="280;"></el-table-column>
         <el-table-column prop="tag" label="标签" align="center">
           <template slot-scope="scope">
             <div style="width: 100%; overflow: hidden; text-overflow: ellipsis;">
@@ -59,15 +59,15 @@
             </div>
           </template>
         </el-table-column>
-        <el-table-column prop="viewCount" label="浏览数" sortable align="center" width="100"></el-table-column>
-        <el-table-column prop="createdAt" label="发布时间" sortable align="center"></el-table-column>
-        <el-table-column prop="updatedAt" label="更新时间" sortable align="center"></el-table-column>
+        <el-table-column prop="viewCount" label="浏览数" align="center" width="80"></el-table-column>
+        <el-table-column prop="createdAt" label="发布时间" align="center" width="170"></el-table-column>
+        <el-table-column prop="updatedAt" label="更新时间" align="center" width="170"></el-table-column>
         <el-table-column label="是否公开" align="center" width="80">
           <template slot-scope="scope">
             <el-switch v-model="scope.row.public" @change="editPublic($event, scope.row.id)"></el-switch>
           </template>
         </el-table-column>
-        <el-table-column label="操作" align="center" width="220">
+        <el-table-column label="操作" align="center" width="210">
           <template slot-scope="scope">
             <router-link :to="'/article/'+ scope.row.id"><el-button type="primary" size="small">查看</el-button></router-link>
             <router-link :to="'/admin/editArticle/'+ scope.row.id"><el-button type="primary" size="small">编辑</el-button></router-link>

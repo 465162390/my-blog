@@ -49,6 +49,9 @@ ul {
 a {
   text-decoration: none;
 }
+.el-divider__text {
+  padding: 0 10px;
+}
 /* 右边栏 */
 
 /* 留言 */
@@ -67,11 +70,17 @@ a {
 .comments-list {
   margin-top: 20px;
 }
+.comment {
+  margin-top: -10px;
+}
 .comment:last-child {
   margin-bottom: 30px;
 }
 .comment:last-child .el-divider {
   display: none;
+}
+.comment .el-divider--horizontal {
+  margin: 10px 0;
 }
 .avatar {
   display: inline-block;

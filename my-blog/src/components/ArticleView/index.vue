@@ -1,8 +1,6 @@
 <!-- 文章内容组件 -->
 <template>
-  <div :id="'articleView'+this.id">
-    <textarea style="display: none" name="editormd" v-model="article"></textarea>
-  </div>
+  <div :id="'articleView-'+this.id"></div>
 </template>
 
 <script>
@@ -22,20 +20,15 @@ export default {
     }
   },
 
-  created() {
-    this.$nextTick(() => {
-      let editorView = editormd.markdownToHTML("articleView"+this.id, {
-        htmlDecode: "style,script,iframe",
-        emoji: true,
-        taskList: true,
-        tex: true, // 默认不解析
-        flowChart: true, // 默认不解析
-        sequenceDiagram: true // 默认不解析
-      });
+  created() {},
+
+  mounted() {
+    // this.Viewer (markdown编辑器,在main.js全局引入)
+    const articleViewer = new this.Viewer({
+      el: document.querySelector(`#articleView-${this.id}`),
+      initialValue: this.article,
     });
   },
-
-  mounted() {},
 
   components: {},
 
@@ -44,5 +37,6 @@ export default {
   methods: {}
 };
 </script>
+
 <style scoped>
 </style>

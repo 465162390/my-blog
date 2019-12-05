@@ -7,7 +7,7 @@
       <span class="title">NGKAKUI &nbsp;&nbsp;BLOG</span>
       <span class="quotes">世间所有的相遇，都是久别重逢</span>
       <p class="btn">
-        <router-link to="/index">
+        <router-link to="/article">
           <el-button type="primary" plain round><span style="font-size: 25px">Enter</span></el-button>
         </router-link>
       </p>

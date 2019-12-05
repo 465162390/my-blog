@@ -36,6 +36,8 @@ mysqli_query($link,'set names utf8 ');
     $sql .= " ORDER BY createdAt DESC limit $from,$pagesize";
     $select_result = mysqli_query($link,$sql);
 
+    $from = $from + 1;
+
     if ($select_result) {
         while ($row = mysqli_fetch_assoc($select_result)) {
             $row["role"] == "1" ? $row["role"] = "博主用户" : $row["role"] = "普通用户";

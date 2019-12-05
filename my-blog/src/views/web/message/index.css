@@ -63,6 +63,9 @@
   font-weight: 700;
   vertical-align: 10px;
 }
+.comment {
+  margin-top: -10px;
+}
 .comment .el-divider--horizontal {
   margin: 10px 0;
 }
@@ -86,7 +89,7 @@
   width: 100%;
   display: inline;
   margin-left: 10px;
-  color: rgba(0, 0, 0, 0.45);
+  color: rgba(0, 0, 0, 0.65);
   font-size: 15px;
 }
 .comment-time {

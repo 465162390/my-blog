@@ -40,7 +40,7 @@
 
             <!-- 移动端导航栏 -->
             <el-menu :default-active="$route.path" class="el-menu-vertical-demo" :collapse="isCollapse" :router="true">
-              <el-menu-item index="/index" @click="isCollapse = true">
+              <el-menu-item index="/article" @click="isCollapse = true">
                 <i class="el-icon-s-home"></i>
                 <span slot="title" class="mobile-text">首页</span>
               </el-menu-item>
@@ -121,7 +121,7 @@
           <el-menu-item class="header-right" index="/archives">
             <i class="el-icon-s-help"></i>归档
           </el-menu-item>
-          <el-menu-item class="header-right" index="/index">
+          <el-menu-item class="header-right" index="/article">
             <i class="el-icon-s-home"></i>首页
           </el-menu-item>
         </el-menu>
@@ -222,10 +222,10 @@ export default {
     // 根据标题关键字查询文章
     fetchArticle() {
       this.isCollapse = true
-      if(this.$route.path != "/index") {
-        this.search.title != "" ? this.$router.push({path:'/index',query: this.search}) : "";
+      if(this.$route.path != "/article") {
+        this.search.title != "" ? this.$router.push({path:'/article',query: this.search}) : "";
       } else {
-        this.$router.push({path:'/index',query: this.search})
+        this.$router.push({path:'/article',query: this.search})
       }
     },
 

@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { MessageBox, Message, Loading } from 'element-ui'
+import { Message, Loading } from 'element-ui'
 import { type } from 'os'
 import qs from 'qs'
 

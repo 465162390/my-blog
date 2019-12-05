@@ -64,7 +64,7 @@
     </el-form>
 
     <!-- 富文本框 -->
-    <md-editor ref="mdeditor" :id="id" :content="article.content" v-if="showMark"/>
+    <tui-editor ref="mdeditor" :id="id" :content="article.content" v-if="showMark"/>
 
     <div class="submit-button">
       <el-button type="primary" @click="submitArticle">提交文章</el-button>
@@ -73,7 +73,7 @@
 </template>
 
 <script>
-import MdEditor from "@/components/MdEditor"
+import TuiEditor from "@/components/TuiEditor"
 import { addArticle } from '@/api/article'
 import { editArticle } from '@/api/article'
 import { isNull } from "@/utils/vaildata"
@@ -99,6 +99,7 @@ export default {
       categoryVisible: false,
       inputValue: "",
       showMark: false,
+      value: "",
     };
   },
 
@@ -126,7 +127,7 @@ export default {
   },
 
   components: {
-    MdEditor
+    TuiEditor,
   },
 
   computed: {},
@@ -183,9 +184,9 @@ export default {
     // 提交文章
     submitArticle() {
       // refs上的mdeditor里面的editor就是生成的富文本编辑器的实例
-      // console.log(this.$refs.mdeditor.editor.getMarkdown());  // getMarkdown() 获取富文本编辑器的内容 , getHTML() 获取富文本编辑器的html源码
       // 将富文本编辑器的html源码保存到数据库中
-      this.article.content = this.$refs.mdeditor.editor.getMarkdown()
+      // getMarkdown() 获取markdown语法的内容， gerHtml() 获取编辑器html源码
+      this.article.content = this.$refs.mdeditor.instance.getMarkdown();
 
       // 将选择的标签和分类保存到后端
       this.isSelect(this.newCategories, "categories")
@@ -225,15 +226,12 @@ export default {
     // 修改文章是否公开
     editPublic(status) {
       this.article.public = status;
-    }
+    },
   }
 };
 </script>
 
 <style scoped>
-.editormd {
-  border-radius: 5px;
-}
 .el-tag {
   cursor: pointer;
   margin-left: 10px;
@@ -251,7 +249,7 @@ export default {
   vertical-align: bottom;
 }
 .submit-button {
-  margin-top: -8px;
+  margin-top: 10px;
   float: right;
 }
 </style>

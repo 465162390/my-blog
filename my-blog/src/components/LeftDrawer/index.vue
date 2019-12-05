@@ -32,7 +32,7 @@
         <!-- 热门文章 -->
         <div class="draw-article">
           <el-divider content-position="left">
-            <font style="font-size: 15px;">热门文章</font>
+            <font style="font-size: 12px; color: red;">[hot]&nbsp;&nbsp;</font><font style="font-size: 15px;">热门文章</font>
           </el-divider>
           <ul class="article-list">
             <li v-for="article in hotArticles" :key="article.id">

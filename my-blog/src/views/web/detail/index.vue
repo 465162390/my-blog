@@ -1,6 +1,6 @@
 <!-- 文章详情页 -->
 <template>
-  <div v-loading="loading">
+  <div>
     <!-- 主内容 -->
     <div class="center">
     
@@ -71,7 +71,7 @@
         <div class="comments-header">
           <span class="comments-count" v-if="article.comments">{{article.comments.length}}</span>条评论
           <el-divider></el-divider>
-          <el-input type="textarea" :rows="4" placeholder="说点什么..." v-model="comment.content"></el-input>
+          <el-input type="textarea" :rows="4" placeholder="说点什么..." v-model.trim="comment.content"></el-input>
           <div style="margin-top: 5px; text-align: right">
             <span class="tip">
               <i style="font-size: 18px; vertical-align: text-bottom" class="el-icon-info"></i>
@@ -96,7 +96,6 @@
             
             <!-- 评论内容的富文本框 -->
             <comment-view class="comment-content" v-if="message.content" :id="message.id" :message="message.content" v-highlight/>
-            <!-- <span class="comment-content">{{message.content}}</span> -->
 
             <!-- 删除按钮 -->
             <span class="comment-btn" v-if="$store.state.user.role == '1'">
@@ -126,7 +125,7 @@
     <!-- 右边边栏 -->
     <div class="right">
       <el-divider content-position="center">
-        <font style="font-size: 16px;">最新文章</font>
+        <font style="font-size: 12px; color: red;">[new]&nbsp;</font><font style="font-size: 15px;">最新文章</font>
       </el-divider>
       <ul class="title">
         <li v-for="article in latestArticles" :key="article.id">
@@ -208,25 +207,26 @@ export default {
 
     // 评论
     addComment() {
-      if (!isNull(this.comment.content)) {
-        this.$store.state.user.name == undefined ? this.comment.name = "游客" : this.comment.name = this.$store.state.user.name;
-        this.comment.operation = "add"
-        handleComment(this.comment).then(response => {
-          this.article.comments = response.data;
-          Message({
-            message: response.message,
-            type: response.type,
-            duration: 2000
-          });
-        })
-        this.comment.content = "";
-      } else {
-        Message({
-          message: "留言不能为空!",
-          type: "error",
-          duration: 2000
-        });
-      }
+      console.log(this.comment.content);
+      // if (!isNull(this.comment.content)) {
+      //   this.$store.state.user.name == undefined ? this.comment.name = "游客" : this.comment.name = this.$store.state.user.name;
+      //   this.comment.operation = "add"
+      //   handleComment(this.comment).then(response => {
+      //     this.article.comments = response.data;
+      //     Message({
+      //       message: response.message,
+      //       type: response.type,
+      //       duration: 2000
+      //     });
+      //   })
+      //   this.comment.content = "";
+      // } else {
+      //   Message({
+      //     message: "留言不能为空!",
+      //     type: "error",
+      //     duration: 2000
+      //   });
+      // }
     },
 
     // 删除留言
@@ -254,7 +254,25 @@ export default {
 <style src="./index.css" scoped></style>
 
 <style>
-.editormd-html-preview code{
-  color: red;
+.article-main code {
+  padding: 2px 4px;
+  word-wrap: break-word;
+  color: #ff502c;
+  background: #fff5f5;
+  border-radius: 3px;
+  font-size: 13px;
+  font-family: consolas,Menlo,PingFang SC,Microsoft YaHei,monospace;
+}
+.article-main pre code {
+  overflow: auto;
+  font-size: 13px;
+  color: #4d4d4c;
+  font-family: consolas,Menlo,PingFang SC,Microsoft YaHei,monospace;
+}
+.article-main a {
+  text-decoration: none;
+}
+.article-main ul li {
+  list-style: circle;
 }
 </style>

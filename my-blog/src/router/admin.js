@@ -1,7 +1,6 @@
 // 后台路由
 import Layout from '@/Layout/admin'
 
-
 export default {
   path: '/admin',
   redirect: '/admin/articleManage',
@@ -54,6 +53,14 @@ export default {
         requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录的
       },
       component: () => import('@/views/admin/article/edit'),
+    },
+    {
+      path: '/admin/linkManage',
+      name: '友情链接管理',
+      meta: {
+        requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录的
+      },
+      component: () => import('@/views/admin/link'),
     },
   ]
 }
