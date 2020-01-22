@@ -1,6 +1,5 @@
 import axios from 'axios'
 import { Message, Loading } from 'element-ui'
-import { type } from 'os'
 import qs from 'qs'
 
 // 根据生产环境、开发环境自动设置axios的请求地址

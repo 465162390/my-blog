@@ -23,9 +23,9 @@ export default {
   created() {},
 
   mounted() {
-    // this.Viewer(markdown编辑器,main.js全局引入)
-    const commentViewer = new this.Viewer({
+    const commentViewer = new tui.Editor.factory({
       el: document.querySelector(`#commentView-${this.id}`),
+      viewer: true,
       initialValue: this.message,
     });
   },

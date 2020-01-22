@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50641
 File Encoding         : 65001
 
-Date: 2019-11-20 09:49:16
+Date: 2020-01-22 10:18:02
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -21,12 +21,12 @@ SET FOREIGN_KEY_CHECKS=0;
 DROP TABLE IF EXISTS `article`;
 CREATE TABLE `article` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` text,
-  `content` longtext,
+  `title` varchar(255) NOT NULL,
+  `content` longtext NOT NULL,
   `viewCount` int(11) DEFAULT '0',
-  `createdAt` varchar(50) DEFAULT NULL,
-  `updatedAt` varchar(50) DEFAULT NULL,
-  `public` varchar(10) DEFAULT NULL,
+  `createdAt` varchar(50) NOT NULL,
+  `updatedAt` varchar(50) NOT NULL,
+  `public` varchar(10) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -80,6 +80,22 @@ CREATE TABLE `comment` (
 
 -- ----------------------------
 -- Records of comment
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `friendly_link`
+-- ----------------------------
+DROP TABLE IF EXISTS `friendly_link`;
+CREATE TABLE `friendly_link` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) DEFAULT NULL,
+  `link` varchar(50) DEFAULT NULL,
+  `avatar_link` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of friendly_link
 -- ----------------------------
 
 -- ----------------------------
@@ -142,10 +158,10 @@ CREATE TABLE `user` (
   `createdAt` varchar(50) NOT NULL,
   `token` varchar(55) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('1', 'ngkakui', '5e287476b97f9b26d6e1607b80914138', 'NGKAKUI', '1', '2019-11-11 16:00:08', null);
-INSERT INTO `user` VALUES ('2', 'admin', 'e10adc3949ba59abbe56e057f20f883e', 'admin', '1', '2019-11-20 09:48:45', null);
+INSERT INTO `user` VALUES ('1', 'ngkakui', '5b2b3ab7e18e938f3898f24d4f14480b', 'NGKAKUI', '1', '2019-11-11 16:00:08', 'MWJlOTRlMWM3NWFhYzQ1ZmFkYzQxODZlYzcyYzM3Y2Ex');
+INSERT INTO `user` VALUES ('2', 'admin', '21232f297a57a5a743894a0e4a801fc3', 'admin', '1', '2019-11-19 09:35:15', 'YjQzYjVjODBkMmFmZjdmNWE5M2I5ZmY1ZWEzN2FiMWUy');

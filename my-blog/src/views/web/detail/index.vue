@@ -63,7 +63,7 @@
 
       <!-- 文章内容 -->
       <div class="article-main">
-        <article-view v-if="article.content" :id="article.id" :article="article.content" v-highlight/>
+        <article-view v-if="article.content" :id="article.id" :article="article.content" v-highlight v-directory v-img-viewer/>
       </div>
 
       <!-- 发表评论框 -->
@@ -91,7 +91,7 @@
           </div>
           <!-- 评论信息 -->
           <div class="author">
-            <span style="vertical-align: 13px;">{{message.name}}</span>
+            <span style="vertical-align: 13px; color: #409EFF">{{message.name}}</span>
             <span class="comment-time">{{message.createdAt}}</span>
             
             <!-- 评论内容的富文本框 -->
@@ -120,10 +120,44 @@
           </div>
         </div>
       </div>
+
+      <!-- 右边抽屉按钮 -->
+      <div class="drawer rightD" @click="rightDrawer = true">
+        <svg 
+          t="1574488903479" 
+          class="icon" 
+          viewBox="0 0 1024 1024" 
+          version="1.1" 
+          xmlns="http://www.w3.org/2000/svg" 
+          p-id="3385" 
+          width="16" 
+          height="16">
+          <path d="M51.2 56.32h921.6c28.27776 0 51.2 22.92224 51.2 51.2s-22.92224 51.2-51.2 51.2H51.2C22.92224 158.72 0 135.79776 0 107.52s22.92224-51.2 51.2-51.2z m0 399.36h921.6c28.27776 0 51.2 22.92224 51.2 51.2s-22.92224 51.2-51.2 51.2H51.2c-28.27776 0-51.2-22.92224-51.2-51.2s22.92224-51.2 51.2-51.2z m0 399.36h921.6c28.27776 0 51.2 22.92224 51.2 51.2s-22.92224 51.2-51.2 51.2H51.2c-28.27776 0-51.2-22.92224-51.2-51.2s22.92224-51.2 51.2-51.2z" fill="#515151" p-id="3386"></path>
+        </svg>
+      </div>
+
+      <!-- 右边抽屉 -->
+      <right-drawer class="right-drawer" :directorys="directorys" :latestArticles="latestArticles" :drawer="rightDrawer" @goAnchor="goAnchor" @changeDrawer="changeDrawer" />
+
     </div>
 
     <!-- 右边边栏 -->
     <div class="right">
+      <!-- 时钟 -->
+      <!-- <clock/> -->
+      <div v-if="directorys && directorys.length != 0">
+        <el-divider content-position="center" >
+          <font style="font-size: 15px;">目录锚点</font>
+        </el-divider>
+        <ul class="anchor">
+          <li v-for="(directory, index) in directorys" :key="index">
+            <a href="javascript:void(0)" @click="goAnchor(directory.substr(3, directory.length))">
+              {{directory.substr(3, directory.length)}}
+            </a>
+          </li>
+        </ul>
+      </div>
+
       <el-divider content-position="center">
         <font style="font-size: 12px; color: red;">[new]&nbsp;</font><font style="font-size: 15px;">最新文章</font>
       </el-divider>
@@ -157,9 +191,12 @@ import { fetchDetail } from '@/api/article'
 import { fetchArticle } from '@/api/article'
 import { handleComment } from '@/api/article'
 import ArticleView from '@/components/ArticleView'
+import Clock from '@/components/Clock'
 import CommentView from '@/components/CommentView'
+import RightDrawer from './components/RightDrawer'
 import { isNull } from "@/utils/vaildata";
 import { Message } from "element-ui"
+import { titleFormat } from '@/utils/vaildata'
 
 export default {
   name: '',
@@ -175,6 +212,8 @@ export default {
       // 删除评论popver的隐藏/显示
       visible: [],
       latestArticles:[],
+      directorys: [],
+      rightDrawer: false,
     };
   },
 
@@ -185,6 +224,8 @@ export default {
   components: {
     ArticleView,
     CommentView,
+    Clock,
+    RightDrawer,
   },
 
   computed: {},
@@ -194,7 +235,10 @@ export default {
     onSearch() {
       fetchDetail({id: this.$route.params.id}).then(response => {
         this.article = response.data;
+        // 创建文章目录
+        this.directorys = this.article.content.match(/(\#+)(.*)/g) && this.createDirectory(this.article.content.match(/(\#+)(.*)/g))
       })
+
       // 请求最新的10篇文章
       let params = {
         page: 1,
@@ -205,28 +249,35 @@ export default {
       })
     },
 
+    // 删除目录中的非目录元素
+    createDirectory(directory) {
+      for(let i=0; i<directory.length; i++) {
+        directory[i].match(/\#docs/g) ? directory.splice(i, 1) : "";
+      }
+      return directory;
+    },
+
     // 评论
     addComment() {
-      console.log(this.comment.content);
-      // if (!isNull(this.comment.content)) {
-      //   this.$store.state.user.name == undefined ? this.comment.name = "游客" : this.comment.name = this.$store.state.user.name;
-      //   this.comment.operation = "add"
-      //   handleComment(this.comment).then(response => {
-      //     this.article.comments = response.data;
-      //     Message({
-      //       message: response.message,
-      //       type: response.type,
-      //       duration: 2000
-      //     });
-      //   })
-      //   this.comment.content = "";
-      // } else {
-      //   Message({
-      //     message: "留言不能为空!",
-      //     type: "error",
-      //     duration: 2000
-      //   });
-      // }
+      if (!isNull(this.comment.content)) {
+        this.$store.state.user.name == undefined ? this.comment.name = "游客" : this.comment.name = this.$store.state.user.name;
+        this.comment.operation = "add"
+        handleComment(this.comment).then(response => {
+          this.article.comments = response.data;
+          Message({
+            message: response.message,
+            type: response.type,
+            duration: 2000
+          });
+        })
+        this.comment.content = "";
+      } else {
+        Message({
+          message: "留言不能为空!",
+          type: "error",
+          duration: 2000
+        });
+      }
     },
 
     // 删除留言
@@ -246,7 +297,20 @@ export default {
         });
       })
     },
+
+    // 目录锚点定位
+    goAnchor(select) {
+      let selector = titleFormat(select)
+      this.$el.querySelector(`#${selector}`).scrollIntoView({behavior:"smooth",block: "start", inline: "nearest"})
+    },
+
+    // 改变抽屉状态
+    changeDrawer(params) {
+      this.rightDrawer = params;
+    },
+
   }
+
 }
 
 </script>
@@ -261,7 +325,7 @@ export default {
   background: #fff5f5;
   border-radius: 3px;
   font-size: 13px;
-  font-family: consolas,Menlo,PingFang SC,Microsoft YaHei,monospace;
+  font-family: consolas,Menlo,PingFang SC,Microsoft YaHei,monospace; 
 }
 .article-main pre code {
   overflow: auto;

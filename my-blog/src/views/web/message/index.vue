@@ -2,13 +2,21 @@
 <template>
   <el-row>
     <el-col class="center" :xs="24" :sm="24" :md="24" :lg="18" :xl="18">
-      <!-- <el-image style="width: 50%; height: auto;" src="../../../../static/img/message.jpg"></el-image> -->
 
       <!-- 顶部文字 -->
       <div class="sub-title">
         <p>留言板</p>
         <p>欢迎大家来到我的博客！</p>
         <p>走过路过不要错过！大家一起交流学习，尽情畅谈！</p>
+      </div>
+
+      <!-- 申请友链格式 -->
+      <div class="friendly">
+        <h3 class="friendly_title">友链申请方式</h3> 
+        <p>需要申请友链请在下方留言,格式如下</p> 
+        <p>网站名称：<font style="color:#409EFF">NGKAKUI's Blog</font></p>
+        <p>链接：<font style="color:#409EFF">https://www.ngkakui.cn</font></p>
+        <p>Logo链接：<font style="color:#409EFF">https://www.ngkakui.cn/static/img/logo2.jpg</font></p>
       </div>
 
       <!-- 留言输入框 -->
@@ -64,7 +72,7 @@
           </div>
           <!-- 留言信息 -->
           <div class="author">
-            <span style="vertical-align: 13px;">{{message.name}}</span>
+            <span style="vertical-align: 13px; color: #409EFF">{{message.name}}</span>
             <span class="comment-time">{{message.createdAt}}</span>
 
             <comment-view class="comment-content" v-if="message.content" :id="message.id" :message="message.content" v-highlight/>
@@ -249,7 +257,7 @@ export default {
     handleCurrentChange(val) {
       this.page = val;
       this.onSearch();
-    }
+    },
   }
 };
 </script>

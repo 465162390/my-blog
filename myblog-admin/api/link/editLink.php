@@ -6,14 +6,15 @@ mysqli_query($link,'set names utf8 ');
     $operation = $_POST["operation"];
     $name = $_POST["name"];
     $_link = $_POST["link"];
+    $avatar_link = $_POST["avatar_link"];
     $status = new stdClass();
 
     if ($operation == "create") {
-        $sql = "insert into friendly_link (name, link) values ('$name', '$_link')";
+        $sql = "insert into friendly_link (name, link, avatar_link) values ('$name', '$_link', '$avatar_link')";
         $message = "新增";
     } else {
         $id = $_POST["id"];
-        $sql = "update friendly_link set name='$name', link='$_link' where id='$id'";
+        $sql = "update friendly_link set name='$name', link='$_link', avatar_link='$avatar_link' where id='$id'";
         $message = "修改";
     }
 

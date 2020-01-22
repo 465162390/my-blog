@@ -30,7 +30,7 @@
 .title li span {
   display: block;
   border-radius: 5px;
-  padding: 8px 0 8px 5px;
+  padding: 3px 0 3px 5px;
   cursor: pointer;
   white-space: nowrap;
   overflow: hidden;
@@ -52,7 +52,30 @@ a {
 .el-divider__text {
   padding: 0 10px;
 }
+.anchor a:visited {
+  color: #40a9ff;
+  border-left: 1px solid #40a9ff;
+}
 /* 右边栏 */
+
+/* 目录锚点 */
+.anchor li {
+  padding: 3px;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #8590a6;
+  font-size: 14px;
+}
+.anchor li a {
+  width: 100%;
+  color: #8590a6;
+}
+.anchor li:hover a {
+  color: #40a9ff; 
+}
+/* 目录锚点 */
 
 /* 留言 */
 .tip {
@@ -113,12 +136,31 @@ a {
   margin-left: 55px;
   float: right;
 }
-
 /* 留言 */
 
-@media (max-width: 1350px) {
+/* 抽屉按钮 */
+.drawer {
+  display: none;
+  position: fixed;
+  top: 90px;
+  /* -webkit-box-shadow: 2px 0 8px rgba(0, 0, 0.2, 0.3); */
+  box-shadow: 2px 0 8px rgba(0, 0, 0, .3);
+  width: 42px;
+  height: 42px;
+  text-align: center;
+  line-height: 45px;
+  background: #fff;
+}
+
+@media (max-width: 1279px) {
   .right {
     display: none;
+  }
+  /* 右边抽屉按钮 */
+  .rightD {
+    display: block;
+    right: -1px;
+    border-radius: 4px 0 0 4px;
   }
   .center {
     width: 100%;

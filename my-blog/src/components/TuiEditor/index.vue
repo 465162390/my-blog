@@ -42,9 +42,7 @@ export default {
 
   mounted() {
     let vm = this
-
-    // this.Editor (markdown编辑器,在main.js全局引入)
-    vm.instance = new this.Editor({
+    vm.instance = new tui.Editor({
       el: document.querySelector('#tuiEditor'),
       initialEditType: 'markdown',
       previewStyle: 'vertical',
@@ -140,6 +138,9 @@ export default {
 </script>
 
 <style>
+.CodeMirror-sizer {
+  height: 335px;
+}
 @media(max-width: 550px) {
   .tui-editor-defaultUI-toolbar {
     padding: 0px;

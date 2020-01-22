@@ -4,22 +4,11 @@
 }
 .sub-title {
   font-family: "STHupo";
-  /* -webkit-transition: all 0.2s linear; */
-  /* transition: all 0.2s linear; */
   margin-top: 2px;
   font-size: 22px;
   color: darkturquoise;
-  /* border-radius: 50px; */
-  /* border: 0.1em solid rgb(213, 213, 213); */
-  /* background-color: aliceblue; */
   text-align: center;
 }
-/* .sub-title:hover {
-  -webkit-transform: translate(0, -2px);
-  transform: translate(0, -2px);
-  -webkit-box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.1);
-} */
 .center {
   padding-right: 20px;
 }
@@ -111,6 +100,26 @@
   float: right;
   margin: 30px 0;
 }
+/* 申请友链 */
+.friendly {
+  width: 100%;
+  background: aliceblue;
+  text-align: center;
+  border: 3px dashed lightgray;
+  border-radius: 10px;
+  color: rgba(0, 0, 0, 0.65);
+
+}
+.friendly_title {
+  font-size: 18px;
+}
+.friendly p {
+  overflow: auto;
+  white-space: nowrap;
+  color: rgba(0, 0, 0, 0.45);
+}
+
+
 
 @media (max-width: 1900px) {
   .right {

@@ -1,6 +1,6 @@
 <!-- 顶部导航栏 -->
 <template>
-  <div>
+  <div class="navbar">
     <el-row style="box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08); -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);">
       <el-col :xs="0" :sm="4" :md="4" :lg="4" :xl="4" class="hidden-sm-and-down">
         <el-menu style="text-align: center" class="el-menu" mode="horizontal">
@@ -184,6 +184,7 @@ import { login } from "@/api/user";
 import { logout } from "@/api/user";
 import { register } from "@/api/user";
 import { Message } from "element-ui";
+import { isNullObject } from "@/utils/vaildata";
 
 export default {
   name: "Navbar",
@@ -231,47 +232,63 @@ export default {
 
     // 登录
     login() {
-      login(this.loginUser).then(response => {
-        response.code == 200 ? (
-          this.loginVisible = false,
-          this.$refs.loginForm.resetFields(),
-          Message({
-            type: response.type,
-            message: response.message + "欢迎你，" + response.user.name,
-            duration: 2000,
-          }),
-          window.sessionStorage.setItem("user", JSON.stringify(response.user)),
-          this.$store.commit("changeInfo", response.user)
-        ) : 
-        Message({
-          type: response.type,
-          message: response.message,
-          duration: 2000,
-        });
-      })
-    },
-
-    // 注册
-    register() {
-      if(this.registerUser.password == this.registerUser.confirmpwd) {
-        delete this.registerUser.confirmpwd;
-        register(this.registerUser).then(response => {
-          // 清空输入框
-          response.code == 200 ? (this.registerVisible = false, this.$refs.registerForm.resetFields()) : "";
+      if ( !isNullObject(this.loginUser) ) {
+        login(this.loginUser).then(response => {
+          response.code == 200 ? (
+            this.loginVisible = false,
+            this.$refs.loginForm.resetFields(),
+            Message({
+              type: response.type,
+              message: response.message + "欢迎你，" + response.user.name,
+              duration: 2000,
+            }),
+            window.sessionStorage.setItem("user", JSON.stringify(response.user)),
+            this.$store.commit("changeInfo", response.user)
+          ) : 
           Message({
             type: response.type,
             message: response.message,
             duration: 2000,
-          })
+          });
         })
       } else {
         Message({
+          message: "账号和密码不能为空!",
           type: "error",
-          message: "两次密码输入不正确，请重新输入!",
           duration: 2000,
         })
       }
+    },
 
+    // 注册
+    register() {
+      // 必填项是否为空
+      if ( !isNullObject(this.registerUser) ) {
+        if(this.registerUser.password == this.registerUser.confirmpwd) {
+          delete this.registerUser.confirmpwd;
+          register(this.registerUser).then(response => {
+            // 清空输入框
+            response.code == 200 ? (this.registerVisible = false, this.$refs.registerForm.resetFields()) : "";
+            Message({
+              type: response.type,
+              message: response.message,
+              duration: 2000,
+            })
+          })
+        } else {
+          Message({
+            type: "error",
+            message: "两次密码输入不正确，请重新输入!",
+            duration: 2000,
+          })
+        }
+      } else {
+        Message({
+          duration: 2000,
+          message: "必填项不能为空!",
+          type: "error"
+        })
+      };
     },
 
     handleClose(visible) {
@@ -279,12 +296,17 @@ export default {
       this.registerVisible = false;
     },
   },
-  created() {
-  }
+
+  created() {}
 };
 </script>
 
 <style scoped>
+.navbar {
+  left: 0;
+  right: 0;
+  top: 0;
+}
 .el-menu {
   z-index: 99;
   padding: 0;

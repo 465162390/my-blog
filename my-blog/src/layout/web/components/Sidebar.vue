@@ -162,7 +162,7 @@ a {
   text-align: left;
 }
 .article-list li span {
-  padding: 5px;
+  padding: 2px 5px; 
   display: block;
   overflow: hidden;
   white-space: nowrap;

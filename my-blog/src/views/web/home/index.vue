@@ -79,11 +79,14 @@
           @handleSizeChange="handleSizeChange"
           @handleCurrentChange="handleCurrentChange"
         />
-      </div>
+      </div>      
     </div>
 
     <!-- 右边文章列表 -->
     <div class="right" v-if="articles.length != 0">
+      <!-- 时钟 -->
+      <clock/>
+
       <el-divider content-position="center">
         <font style="font-size: 16px;">文章列表</font>
       </el-divider>
@@ -178,6 +181,7 @@
 
 <script>
 import Pagination from "@/components/Pagination";
+import Clock from "@/components/Clock";
 import LeftDrawer from "@/components/LeftDrawer";
 import RightDrawer from "@/components/RightDrawer";
 import ArticleView from "@/components/ArticleView";
@@ -224,7 +228,8 @@ export default {
     Pagination,
     ArticleView,
     LeftDrawer,
-    RightDrawer
+    RightDrawer,
+    Clock
   },
 
   computed: {},

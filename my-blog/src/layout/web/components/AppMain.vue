@@ -10,11 +10,13 @@
 </template>
 
 <script>
+import { timeFormatter } from '@/utils/vaildata'
+
 export default {
   name: 'AppMain',
   data () {
     return {
-      date: this.moment().format("YYYY"),
+      date: timeFormatter("YYYY"),
       show: true,
     };
   },

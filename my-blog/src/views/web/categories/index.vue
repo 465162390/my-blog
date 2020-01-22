@@ -65,12 +65,10 @@
       <!-- 链接 -->
       <div class="tag-group">
         <a :href="link.link" target="_blank" v-for="link in links" :key="link.id">
-          <el-tag
-            style="cursor: pointer;"
-            effect="dark"
-            :hit="true">
-            <font class="link-font">{{link.name}} 的博客</font>
-          </el-tag>
+          <div class="friendly">
+            <img :src="link.avatar_link">
+            <h3 class="title">{{link.name}}</h3>
+          </div>
         </a>
       </div>
     </div>

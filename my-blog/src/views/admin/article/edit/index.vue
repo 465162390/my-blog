@@ -251,5 +251,6 @@ export default {
 .submit-button {
   margin-top: 10px;
   float: right;
+  margin-bottom: 10px;
 }
 </style>

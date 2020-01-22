@@ -21,6 +21,7 @@
       <el-table :data="categories" style="width: 100%" border>
         <el-table-column type="index" align="center" width="50"></el-table-column>
         <el-table-column prop="name" label="链接名称" align="center"></el-table-column>
+        <el-table-column prop="avatar_link" label="网站logo地址" align="center"></el-table-column>
         <el-table-column prop="link" label="链接地址" align="center"></el-table-column>
         <el-table-column prop="operation" label="操作" align="center" width="200">
           <template slot-scope="scope">
@@ -73,6 +74,9 @@
         <el-form-item label="链接名称：" prop="name" required>
           <el-input v-model.trim="registerLink.name" placeholder="name" clearable></el-input>
         </el-form-item>
+        <el-form-item label="logo地址：" prop="avatar_link" required>
+          <el-input v-model.trim="registerLink.avatar_link" placeholder="logo" clearable></el-input>
+        </el-form-item>
         <el-form-item label="链接地址：" prop="link" required>
           <el-input v-model.trim="registerLink.link" placeholder="username" clearable></el-input>
         </el-form-item>
@@ -108,6 +112,7 @@ export default {
       registerLink: {
         name: "",
         link: "",
+        avatar_link: "",
       }
     };
   },
@@ -123,6 +128,7 @@ export default {
   computed: {},
 
   methods: {
+    // 请求友情链接数据
     onSearch() {
       this.search.type = "category";
       fetchLink(this.search).then(response => {
@@ -131,6 +137,7 @@ export default {
       })
     },
 
+    // 删除友情链接
     delLinks(id) {
       this.$set(this.visible, id, false); // 删除操作
       delLink({id: id}).then(response => {
@@ -169,6 +176,7 @@ export default {
     },
 
     handleClose(visible) {
+      this.registerLink = {};
       this.registerVisible = false;
     },
 

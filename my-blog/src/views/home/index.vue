@@ -2,7 +2,7 @@
 <template>
   <div class="main">
     <div class="cloud"></div>
-    <div class="cloud2"></div>
+    <!-- <div class="cloud2"></div> -->
     <div class="header">
       <span class="title">NGKAKUI &nbsp;&nbsp;BLOG</span>
       <span class="quotes">世间所有的相遇，都是久别重逢</span>

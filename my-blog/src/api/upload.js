@@ -15,11 +15,11 @@ if(reg.test(host)) {
   baseURL = protocol + "//" + host + "/api";
 }
 
-let upload = axios.create({
+let uploadImage = axios.create({
   baseURL: baseURL,
   headers:{"Content-Type":"multipart/form-data"}
 });
 
 export function upload(url , params) {
-  return upload.post(url, params)
+  return uploadImage.post(url, params)
 }

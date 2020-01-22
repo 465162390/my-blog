@@ -47,8 +47,9 @@ module.exports = {
     /**
      * Source Maps
      */
-
-    productionSourceMap: true,
+    // 这个是用于线上调试代码，打包压缩后的js文件出错，如果有map文件，会显示出错的是哪一行
+    // 设置成false之后，项目打包不会出现 .map 文件，可以加快打包速度，减小打包的体积
+    productionSourceMap: false,
     // https://webpack.js.org/configuration/devtool/#production
     devtool: '#source-map',
 

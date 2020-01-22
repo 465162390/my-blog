@@ -31,11 +31,44 @@
   font-size: 15px;
 }
 
-@media (max-width: 450px) {
+/* 友情链接 */
+a {
+  text-decoration: none;
+}
+.friendly {
+  display: inline-block;
+  width: 120px;
+  height: 120px;
+  padding-top: 15px;
+  text-align: center;
+  border: 1px solid #dee1e6;
+  border-radius: 10%;
+  transition: all 0.2s linear;
+  margin: 5px;
+}
+.friendly:hover {
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
+  transform: translate(0, -2px);
+}
+.friendly img {
+  width: 55%;
+  height: auto;
+  border-radius: 50%;
+}
+.friendly .title {
+  font-size: 15px;
+  color: #000000;
+  font-weight: 500;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 449px) {
   .box {
     width: 90%;
-    margin: 20px auto;
-    padding: 10px;
+    margin: 10px auto;
+    padding: 0px;
     box-shadow: none;
     -webkit-box-shadow: none;
     background: white;
@@ -52,5 +85,16 @@
   }
   .link-font {
     font-size: 12px;
+  }
+  /* 友情链接 */
+  .friendly {
+    margin: 3px;
+  }
+}
+
+@media (max-width: 300px) {
+  .box {
+    width: 100%;
+    margin: 10px 0px;
   }
 }

@@ -3,7 +3,7 @@
 }
 .right {
   position: fixed;
-  top: 98px;
+  top: 82px;
   right: 30px;
   width: 250px;
 }
@@ -115,7 +115,7 @@ a {
   background: #fff;
 }
 
-@media (max-width: 1240px) {
+@media (max-width: 1279px) {
   .right {
     display: none;
   }

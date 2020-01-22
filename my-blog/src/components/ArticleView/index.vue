@@ -23,9 +23,9 @@ export default {
   created() {},
 
   mounted() {
-    // this.Viewer (markdown编辑器,在main.js全局引入)
-    const articleViewer = new this.Viewer({
+    const articleViewer = new tui.Editor.factory({
       el: document.querySelector(`#articleView-${this.id}`),
+      viewer: true,
       initialValue: this.article,
     });
   },

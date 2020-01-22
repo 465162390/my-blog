@@ -42,6 +42,7 @@
 <script>
 import Pagination from '@/components/Pagination'
 import { fetch } from '@/api/archives'
+import { timeFormatter } from '@/utils/vaildata'
 
 export default {
   name: "Archives",
@@ -77,7 +78,7 @@ export default {
       type: ["primary ", "success", "info", "warning", "danger"],
       articles: [],
       search: {
-        time: this.moment().format("YYYY-MM"),
+        time: timeFormatter("YYYY-MM"),
         page: 1,
         pagesize: 10,
       },

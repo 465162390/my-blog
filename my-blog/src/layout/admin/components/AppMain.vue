@@ -10,10 +10,13 @@
 </template>
 
 <script>
+import { timeFormatter } from '@/utils/vaildata'
+
 export default {
   name: 'AppMain',
   data () {
     return {
+      date: timeFormatter("YYYY"),
     };
   },
 
@@ -36,6 +39,7 @@ export default {
   height: 50px;
   color: #b2bac2;
   font-size: 13px;
+  margin-bottom: 20px;
 }
 .footer p {
   margin: 5px;
@@ -44,6 +48,7 @@ export default {
 @media(max-width: 450px) {
   .footer { 
     font-size: 12px;
+    margin-bottom: 0px;
   }
 }
 </style>
