@@ -1,11 +1,9 @@
 // 前台路由
 import Layout from '@/Layout/web'
 
-
 export default {
   path: '/article',
   component: Layout,
-  // meta: { title: '控房管理系统管理', icon: 'example' },
   children: [
     {
       path: '/article',

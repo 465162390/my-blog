@@ -10,14 +10,14 @@
       <el-col :span="24" style="font-size: 14px; color: #555">
         <el-divider content-position="left">博客简介</el-divider>
         <p>本博客使用的技术为： Vue.js + Element-UI + PHP + MySql</p>
-        <p>源码地址为 <a href="https://gitlab.com/465162390">gitlab</a>，仅供参考！</p>
+        <!-- <p>源码地址为 <a href="https://gitlab.com/465162390">gitlab</a>，仅供参考！</p> -->
       </el-col>
       <!-- 个人简介 -->
       <el-col :span="24">
         <el-divider content-position="left">个人简介</el-divider>
         <ul class="about-list">
           <li>姓名：&nbsp;伍家驹</li>
-          <li>出生年月：&nbsp;1997.1</li>
+          <!-- <li>出生年月：&nbsp;1997.1</li> -->
           <li>籍贯：&nbsp;广东省江门市</li>
           <li>现居住地：&nbsp;广东省珠海市</li>
           <li>
@@ -35,7 +35,7 @@
               <li>HTML、CSS：能熟练开发页面 &nbsp;&nbsp;&nbsp; <el-rate :value="3" disabled class="star"></el-rate></li>
               <li>vue.js框架：熟练掌握使用  &nbsp;&nbsp;&nbsp; <el-rate :value="3" disabled class="star"></el-rate></li>
               <li>JQ、JavaScript：熟练掌握使用  &nbsp;&nbsp;&nbsp; <el-rate :value="3" disabled class="star"></el-rate></li>
-              <li>node、nginx：掌握基本使用方法  &nbsp;&nbsp;&nbsp; <el-rate :value="2" disabled class="star"></el-rate></li>
+              <!-- <li>node、nginx：掌握基本使用方法  &nbsp;&nbsp;&nbsp; <el-rate :value="2" disabled class="star"></el-rate></li> -->
               <li>PHP、MySql：掌握基本语法  &nbsp;&nbsp;&nbsp; <el-rate :value="2" disabled class="star"></el-rate></li>
             </ul>
           </li>

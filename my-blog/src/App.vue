@@ -14,7 +14,7 @@ export default {
 body {
   padding: 0px;
   margin: 0px;
-  height:100%;
+  height: 100%;
   overflow: hidden;
 }
 </style>

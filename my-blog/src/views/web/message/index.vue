@@ -1,26 +1,32 @@
 <!-- 留言板 -->
 <template>
-  <el-row>
-    <el-col class="center" :xs="24" :sm="24" :md="24" :lg="18" :xl="18">
+  <div class="main">
+    <!-- 主要内容 -->
+    <div class="center">
+      <!-- 顶部内容 -->
+      <div class="top">
+        <!-- 顶部文字 -->
+        <div class="sub-title">
+          <div class="f-tip">
+            <span>tips：</span><span>友链申请格式在背后喔~</span>
+          </div>
+          <p>留言板</p>
+          <p>欢迎大家来到我的博客！</p>
+          <p>走过路过不要错过！大家一起交流学习，尽情畅谈！</p>
+        </div>
 
-      <!-- 顶部文字 -->
-      <div class="sub-title">
-        <p>留言板</p>
-        <p>欢迎大家来到我的博客！</p>
-        <p>走过路过不要错过！大家一起交流学习，尽情畅谈！</p>
+        <!-- 申请友链格式 -->
+        <div class="friendly">
+          <h3 class="friendly_title">友链申请方式</h3> 
+          <p>需要申请友链请在下方留言,格式如下</p> 
+          <p>网站名称：<font style="color:#409EFF">NGKAKUI's Blog</font></p>
+          <p>链接：<font style="color:#409EFF">https://www.ngkakui.cn</font></p>
+          <p>Logo链接：<font style="color:#409EFF">https://www.ngkakui.cn/static/img/logo2.jpg</font></p>
+        </div>
       </div>
 
-      <!-- 申请友链格式 -->
-      <div class="friendly">
-        <h3 class="friendly_title">友链申请方式</h3> 
-        <p>需要申请友链请在下方留言,格式如下</p> 
-        <p>网站名称：<font style="color:#409EFF">NGKAKUI's Blog</font></p>
-        <p>链接：<font style="color:#409EFF">https://www.ngkakui.cn</font></p>
-        <p>Logo链接：<font style="color:#409EFF">https://www.ngkakui.cn/static/img/logo2.jpg</font></p>
-      </div>
-
-      <!-- 留言输入框 -->
-      <div class="input">
+      <!-- 留言框 -->
+      <div class="message-box">
         <svg viewBox="0 0 1024 1024" width="35" height="35">
           <path
             d="M94.72 845.963636v-1.629091c0-0.465455-0.232727 1.163636 0 1.629091zM93.090909 833.629091v3.956364a64.698182 64.698182 0 0 1 17.687273-46.545455A58.88 58.88 0 0 0 93.090909 833.629091z"
@@ -49,46 +55,47 @@
         </svg>
         <span class="message-font">发表留言</span>
         <el-input type="textarea" :rows="5" placeholder="请畅所欲言!" v-model="message.content"></el-input>
-        <div style="margin-top: 5px; text-align: right">
+        <div class="message-btn">
           <span class="tip">
-            <i style="font-size: 18px; vertical-align: text-bottom" class="el-icon-info"></i>
+            <i class="el-icon-info"></i>
             支持 Markdown 语法
           </span>
           <el-button type="primary" @click="addMessage">留言</el-button>
-        </div>
+        </div>        
       </div>
 
       <!-- 留言列表 -->
       <div class="message-list">
-        <h3 style="margin: 10px 0 -10px 0">
-          <font style="color: royalblue; font-size: 22px; vertical-align: -2px;">{{messages.length}}</font> 条留言
-        </h3>
-        <el-divider direction="horizontal"></el-divider>
+        <div class="message-num">
+          <strong>{{messages.length}}</strong> 条留言
+        </div>
 
+        <!-- 留言 -->
         <div class="comment" v-for="message in messages" :key="message.id">
-          <!-- 头像 -->
-          <div class="avatar">
-            <img src="../../../../static/img/avatar.png"/>
+          <!-- 留言信息 头像、名称、时间 -->
+          <div class="info">
+            <div class="avatar">
+              <img src="../../../../static/img/avatar.png"/>
+            </div>
+            <p class="author">
+              {{message.name}}
+            </p>
+            <p class="comment-time">
+              {{message.createdAt}}
+            </p>
           </div>
-          <!-- 留言信息 -->
-          <div class="author">
-            <span style="vertical-align: 13px; color: #409EFF">{{message.name}}</span>
-            <span class="comment-time">{{message.createdAt}}</span>
 
-            <comment-view class="comment-content" v-if="message.content" :id="message.id" :message="message.content" v-highlight/>
-            <!-- 回复、删除按钮 -->
-            <span class="comment-btn">
+          <!-- 留言内容 -->
+          <div class="comment-content">
+            <comment-view v-if="message.content" :id="message.id" :message="message.content" v-highlight/>
+            <div class="comment-btn">
               <!-- <el-button type="primary" icon="el-icon-s-comment" size="mini" @click="replyMessage(message)" circle></el-button> -->
-              <el-popover
-                placement="top"
-                width="100"
-                trigger="click"
-                v-model="visible[message.id]">
+              <el-popover placement="top" width="100" trigger="click" v-model="visible[message.id]">
                 <p>
                   <i class="el-icon-question"></i> 
-                  <span style="margin-left: 5px;">确定删除吗？</span>
+                  <span>确定删除吗？</span>
                 </p>
-                <div style="text-align: right; margin: 0">
+                <div class="btn-group">
                   <el-button size="mini" @click="visible.splice(message.id, 1, false);">取消</el-button>
                   <el-button type="primary" size="mini" @click="deleteMessage(message.id)">确定</el-button>
                 </div>
@@ -102,12 +109,12 @@
                   v-if="$store.state.user.role == '1'"
                 ></el-button>
               </el-popover>
-            </span>
-            <el-divider style="margin: 10px 0;" direction="horizontal"></el-divider>
+            </div>
           </div>
         </div>
 
-        <div v-if="messages.length == 0" style="color: rgba(0,0,0,.45); text-align: center">
+        <!-- 空内容提示 -->
+        <div v-if="messages.length == 0" class="comment-empty">
           还没有留言，快来抢沙发！！
         </div>
       </div>
@@ -119,33 +126,30 @@
           :pagesize="search.pagesize"
           :total="total"
           @handleSizeChange="handleSizeChange"
-          @handleCurrentChange="handleCurrentChange"
-        />
+          @handleCurrentChange="handleCurrentChange"/>
       </div>
-    </el-col>
+    </div>
 
-    <el-col :xs="1" :sm="1" :md="1" :lg="1" :xl="1" class="hidden-md-and-down">
-      <el-divider direction="vertical" class="line-height"></el-divider>
-    </el-col>
+    <!-- 分界线 -->
+    <div class="line"></div>
 
     <!-- 右边栏 -->
-    <el-col :xs="5" :sm="5" :md="5" :lg="5" :xl="5" class="hidden-md-and-down">
-      <div class="right">
-        <div class="right-title">
-          <p>欢迎你!</p>
-          <p>
-            来自
-            <font class="font">{{user.province}}-{{user.city}}</font> 的朋友
-          </p>
-          <p style="padding: 0 3px;">
-            你的IP地址是：
-            <font class="font">{{user.ip}}</font>
-          </p>
-        </div>
-        <weather />
+    <div class="right">
+      <div class="right-title">
+        <p>欢迎你!</p>
+        <p>
+          来自
+          <font class="font">{{user.province}}-{{user.city}}</font> 的朋友
+        </p>
+        <p style="padding: 0 3px;">
+          你的IP地址是：
+          <font class="font">{{user.ip}}</font>
+        </p>
       </div>
-    </el-col>
-  </el-row>
+      <!-- 天气预报 -->
+      <weather />
+    </div>
+  </div>
 </template>
 
 <script>
@@ -158,7 +162,7 @@ import { fetchMessage } from "@/api/message";
 import { handleMessage } from "@/api/message";
 
 export default {
-  name: "Message",
+  name: 'NewMessage',
   data() {
     return {
       // 获取当前用户的IP地址、地址信息
@@ -192,7 +196,12 @@ export default {
     CommentView,
   },
 
-  computed: {},
+  computed: {
+    // 浏览器窗口高度
+    clientHeight() {
+      return `height:${document.documentElement.clientHeight - 110}px`
+    }
+  },
 
   methods: {
     // 查询所有留言
@@ -259,12 +268,10 @@ export default {
       this.onSearch();
     },
   }
-};
+}
 </script>
+
 <style src="./index.css" scoped></style>
 
-<style>
-.editormd-html-preview code{
-  color: red;
-}
+<style scoped>
 </style>

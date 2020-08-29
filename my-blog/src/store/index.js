@@ -20,6 +20,11 @@ const store = new Vuex.Store({
     // 后台侧边栏的收展
     isCollapse: true,
 
+    // 已点赞的文章id
+    articleId: JSON.parse(window.localStorage.getItem("likeId")) !== null ? JSON.parse(window.localStorage.getItem("likeId")) : [],
+
+    // 博客总访客人数
+    vistorNum: JSON.parse(window.sessionStorage.getItem("vistorNum")) !== null ? JSON.parse(window.sessionStorage.getItem("vistorNum")) : "",
   },
 
   mutations: {
@@ -42,6 +47,14 @@ const store = new Vuex.Store({
     // 侧边栏收展
     changeCollapse(state, params) {
       state.isCollapse = params;
+    },
+    // 文章点赞
+    changeLike(state, params) {
+      state.articleId = params;
+    },
+    // 博客人数
+    changeVistorNum(state, params) {
+      state.vistorNum = params;
     }
   }
 

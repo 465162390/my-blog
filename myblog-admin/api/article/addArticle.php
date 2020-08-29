@@ -67,10 +67,10 @@ mysqli_query($link,'set names utf8 ');
 
     if ($result) {
         $status -> code = 200;
-        $status -> message = "提交文章成功！";
+        $status -> message = "文章提交成功！";
     } else {
         $status -> code = 400;
-        $status -> message = "提交文章失败！";
+        $status -> message = "文章提交失败！";
     }
 
     $obj = json_encode($status,JSON_UNESCAPED_UNICODE).' ';

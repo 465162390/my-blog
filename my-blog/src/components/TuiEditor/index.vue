@@ -139,7 +139,7 @@ export default {
 
 <style>
 .CodeMirror-sizer {
-  height: 335px;
+  /* height: 335px; */
 }
 @media(max-width: 550px) {
   .tui-editor-defaultUI-toolbar {

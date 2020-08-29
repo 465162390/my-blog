@@ -68,7 +68,7 @@
     <el-dialog
       title="友情链接"
       :visible.sync="registerVisible"
-      width="30%"
+      :width="dialogWidth"
       :before-close="handleClose">
       <el-form :model="registerLink" ref="registerForm" label-width="120px" class="login-form" size="mini">
         <el-form-item label="链接名称：" prop="name" required>
@@ -113,12 +113,22 @@ export default {
         name: "",
         link: "",
         avatar_link: "",
-      }
+      },
+      dialogWidth: '',
     };
   },
 
   created() {
     this.onSearch();
+    this.setDialogWidth();
+  },
+
+  mounted() {
+    window.onresize = () => {
+      return (() => {
+        this.setDialogWidth()
+      })()
+    }
   },
 
   components: {
@@ -183,7 +193,34 @@ export default {
     showLink(link) {
       this.registerLink = link;
       this.registerVisible = true;
-    } 
+    },
+
+    // modal对话框响应式
+    setDialogWidth() {
+      // 获取当前浏览器窗口宽度
+      let val = document.body.clientWidth
+      let b = true;
+      switch (b) {
+        case val <= 500:
+          this.dialogWidth = '99%'
+        break;
+        case val <= 650:
+          this.dialogWidth = '85%'
+        break;
+        case val <= 900:
+          this.dialogWidth = '65%'
+        break;
+        case val <= 1200:
+          this.dialogWidth = '50%'
+        break;
+        case val <= 1500:
+          this.dialogWidth = '40%'
+        break;
+        default: 
+          this.dialogWidth = '35%'
+        break;
+      }
+    },
   }
 };
 </script>
@@ -199,6 +236,21 @@ export default {
   margin-top: 10px;
 }
 .login-form {
-  width: 80%;
+  width: 100%;
+  margin: 0 auto;
+}
+</style>
+
+<style>
+/** 登录框 **/
+.el-dialog__header {
+  padding: 20px 20px 20px;
+  border-bottom: 1px solid #e8e8e8;
+}
+.el-dialog__body {
+  border-bottom: 1px solid #e8e8e8;
+}
+.el-input.is-disabled .el-input__inner {
+  color: currentColor;
 }
 </style>

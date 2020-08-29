@@ -3,6 +3,10 @@
   <div>
     <!-- 屏幕宽度 >= 730px -->
     <el-menu :default-active="$route.path" class="el-menu-vertical-demo menu" :collapse="collapse" background-color="#272727" text-color="white" :router="true">
+      <el-menu-item index="/admin/data">
+        <i class="el-icon-s-data"></i>
+        <span slot="title">数据展示</span>
+      </el-menu-item>
       <el-submenu index="/admin/article">
         <template slot="title">
           <i class="el-icon-location"></i>
@@ -31,6 +35,10 @@
 
     <!-- 屏幕宽度 < 730px -->
     <el-menu :default-active="$route.path" class="el-menu-vertical-demo mobile-menu" :collapse="collapse" background-color="#272727" text-color="white" :router="true">
+      <el-menu-item index="/admin/data" @click="changeCollapse">
+        <i class="el-icon-s-data"></i>
+        <span slot="title">数据展示</span>
+      </el-menu-item>
       <el-submenu index="/admin/article">
         <template slot="title">
           <i class="el-icon-location"></i>

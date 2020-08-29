@@ -7,6 +7,7 @@ mysqli_query($link,'set names utf8 ');
     $current_page = $_POST["page"];  // 当前页
     $pagesize = $_POST["pagesize"];    // 每页显示总数
     $time = $_POST["time"];
+    $role = $_POST["role"];
 
     $Array = array();  // 记录所有的文章信息
     $status = new stdClass();
@@ -39,7 +40,7 @@ mysqli_query($link,'set names utf8 ');
         return $arr;
     }
 
-    $sql = "select * from article where createdAt Like '%$time%'";
+    $role == "1" ? $sql = "select * from article where createdAt Like '%$time%'" : $sql = "select * from article where public = 'true' and createdAt Like '%$time%'";
     $result = mysqli_query($link, $sql);
     $recordcount = mysqli_num_rows($result);   // 总记录数
 

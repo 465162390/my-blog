@@ -1,7 +1,7 @@
 <!-- 后台layout布局 -->
 <template>
-  <div style="background:#f0f2f5; position: fixed; right: 0; left: 0">
-    <navbar/>
+  <div style="background:#f0f2f5;">
+    <navbar class="navbar" />
     <div class="container">
       <sidebar :class="sideClass"></sidebar>
       <app-main :class="mainClass"></app-main>
@@ -25,7 +25,7 @@ export default {
   components: {
     Navbar,
     Sidebar,
-    AppMain
+    AppMain,
   },
 
   computed: {

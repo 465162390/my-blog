@@ -6,7 +6,9 @@
         <!-- 个人简介 -->
         <div class="draw-person">
           <img src="../../../static/img/logo2.jpg" />
-          <h3 class="draw-title">NGKAKUI</h3>
+          <div class="name">
+            <h3 class="draw-title">NGKAKUI</h3>
+          </div>
           <h5 class="draw-sub-title">前端搬运工、打杂人员</h5>
           <ul class="pages">
             <li>
@@ -38,6 +40,10 @@
             <li v-for="article in hotArticles" :key="article.id">
               <router-link :to="'/article/'+ article.id">
                 <span>
+                  <svg v-if="article.public=='false'" style="vertical-align: text-top;" t="1582184110620" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1161" width="16" height="16">
+                    <path d="M829.6 960.6h-634c-35.9 0-65.8-23.9-65.8-65.8V434.2c0-35.9 29.9-65.8 65.8-65.8h634c35.9 0 65.8 29.9 65.8 65.8v460.5c6 41.9-23.9 65.9-65.8 65.9z m-634-532.3c-5.9 0-5.9 5.9 0 0l-6 466.5c0 6 0 6 6 6h634c6 0 6 0 6-6V434.2c0-6 0-6-6-6h-634z" p-id="1162" fill="#2c2c2c"></path>
+                    <path d="M590.4 589.8c0-41.9-41.9-77.8-77.8-77.8-41.9 0-71.8 41.9-71.8 77.8 0 29.9 17.9 59.8 47.8 65.8v107.7c0 12 6 17.9 17.9 17.9h23.9c12 0 17.9-6 17.9-17.9V655.5c24.1-5.9 42.1-35.8 42.1-65.7zM763.8 392.4H704v-89.7c0-101.7-83.7-179.4-179.4-179.4-101.7 0-179.4 83.7-179.4 179.4v89.7h-59.8v-89.7c0-131.6 107.7-239.2 239.2-239.2s239.2 107.7 239.2 239.2v89.7z" p-id="1163" fill="#515151"></path>
+                  </svg>
                   <svg viewBox="0 0 1024 1024" width="15" height="15">
                     <path
                       d="M855.04 21.504H471.04c-214.016 0-388.096 174.08-388.096 388.096v504.32c0 50.176 40.96 91.136 91.136 91.136h384c214.016 0 388.096-174.08 388.096-388.096V112.128c0-50.176-40.96-90.624-91.136-90.624z m29.696 594.944c0 180.224-146.432 326.656-326.656 326.656H174.08c-16.384 0-29.696-13.312-29.696-29.696V409.088c0-180.224 146.432-326.656 326.656-326.656h384c16.384 0 29.696 13.312 29.696 29.696v504.32z"
@@ -137,8 +143,18 @@ export default {
   margin: 0 auto;
   height: 130px;
   width: 130px;
+  padding: 5px;
+  border: dashed 2px #00b894;
   border-radius: 50%;
   margin-bottom: 0px;
+}
+.name {
+  width: 115px;
+  height: 34px;
+  box-sizing: border-box;
+  border-bottom: solid 7px #0984e3;
+  border-radius: 50%;
+  margin: 5px auto 12px auto;
 }
 .draw-title {
   margin-top: 5px;

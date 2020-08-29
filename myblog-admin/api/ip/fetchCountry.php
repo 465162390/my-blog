@@ -1,46 +1,63 @@
 <?php
+
 /** 获取客户端的ip地址 **/
 /** 根据ip地址获取所在城市信息 **/
-/** 获取信息的网址：http://ip.tool.chinaz.com （站长工具） **/
 
 header("Content-type:text/html;charset=utf8");
 require_once("../config/config.php");
 require_once '../../vendor/gethtml/simple_html_dom.php';
 
-    function getip() {
-        global $ip;
-        if (getenv("HTTP_CLIENT_IP"))
-            $ip = getenv("HTTP_CLIENT_IP");
-        else if(getenv("HTTP_X_FORWARDED_FOR"))
-            $ip = getenv("HTTP_X_FORWARDED_FOR");
-        else if(getenv("REMOTE_ADDR"))
-            $ip = getenv("REMOTE_ADDR");
-        else
-            $ip = "Unknow";
-        return $ip;
-    }
+// php后端获取ip地址方法
+function getip()
+{
+	global $ip;
+	if (getenv("HTTP_CLIENT_IP"))
+		$ip = getenv("HTTP_CLIENT_IP");
+	else if (getenv("HTTP_X_FORWARDED_FOR"))
+		$ip = getenv("HTTP_X_FORWARDED_FOR");
+	else if (getenv("REMOTE_ADDR"))
+		$ip = getenv("REMOTE_ADDR");
+	else
+		$ip = "Unknow";
+	return $ip;
+}
 
-    $ip = getip();
-    $url = "https://www.hao7188.com/ip/" . $ip .".html";
+/**** GET请求方法 ****/
+function httpget($url) {
+	$curl = curl_init();   // 启动一个curl会话
+	curl_setopt($curl, CURLOPT_URL, $url);   // 要访问的地址
+	curl_setopt($curl, CURLOPT_TIMEOUT, 5);   // 设置超时时间
+	curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);   // 信息以文件流的形式返回
+	curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+	curl_setopt($curl, CURLOPT_HTTPHEADER, array(
+		"Content-Type: application/json",
+	));
+	$tmpInfo = curl_exec($curl);  // 执行操作
+	if (curl_errno($curl)) {
+		echo 'Curl error: ' . curl_error($curl);
+	}
+	curl_close($curl);  // 关闭curl对话
+	return $tmpInfo;
+}
 
-    // 获取该网址的内容
-    $html = file_get_html($url);
-    $arr = [];
-    $status = new stdClass();
+// ip地址
+$ip = getip();
+$status = new stdClass();
 
-    // 获取该网址指定内容
-    foreach($html -> find('table tr td') as $element) {
-        array_push($arr, $element);
-    }
+// 调用高德地图api，根据IP地址定位
+$url = "https://restapi.amap.com/v3/ip?output=JSON&key=4a9f8b65c464a611822dfc7fbe7c9dfa&ip=".$ip;
+$data = json_decode(httpget($url));
+// 如果ip地址获取不到省市的信息，就默认为广东省广州市
+$data -> province == [] ? $data->province="广东省" : "";
+$data -> city == [] ? $data->city="广州市" : "";
 
-    $info = str_replace(' ', '', explode('国', $arr[3]));   // 获取到省市区，并清楚空格
-    $province = explode('省', $info[1])[0] . "省";
-    $city = explode('市', explode('省', $info[1])[1])[0] . "市";
-    $status -> code = 200;
-    $status -> message = "success";
-    $status -> city = $city;
-    $status -> province = $province;
-    $status -> ip = $ip;
+$province = $data -> province;   // 省份
+$city = $data -> city;   // 城市
+$status -> code = 200;
+$status -> message = "success";
+$status -> city = $city;
+$status -> province = $province;
+$status -> ip = $ip;
 
-    $obj = json_encode($status,JSON_UNESCAPED_UNICODE).' ';
-    echo $obj;
+$obj = json_encode($status,JSON_UNESCAPED_UNICODE).' ';
+echo $obj;

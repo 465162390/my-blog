@@ -1,30 +1,49 @@
-.line-height {
-  min-height: calc(100vh - 120px);
-  position: fixed;
+.main {
+  position: relative;
 }
-.sub-title {
-  font-family: "STHupo";
-  margin-top: 2px;
-  font-size: 22px;
-  color: darkturquoise;
-  text-align: center;
-}
+
+/* 主要内容 */
 .center {
-  padding-right: 20px;
+  width: calc(100% - 286px);
+  height: 100%;
 }
+
+/* 分界线 */
+.line {
+  position: fixed;
+  top: 76px;
+  right: 275px;
+  background: #dfe6e9;
+  width: 1px;
+  height: calc(100vh - 92px);
+  margin: 0 10px;
+}
+
+/* 右边栏 */
 .right {
   text-align: center;
+  box-sizing: border-box;
   position: fixed;
-  right: 52px;
+  top: 74px;
+  right: 10px;
+  height: calc(100vh - 92px);
+  width: 265px;
+  overflow: auto;
 }
+.right::-webkit-scrollbar {
+  display: none;
+}
+
+/* 右边栏 ip地址 */
 .right-title {
-  -webkit-transition: all 0.2s linear;
   transition: all 0.2s linear;
-  font-size: 18px;
+  font-size: .9rem;
   color: rgba(0, 0, 0, 0.65);
   border: 0.1em solid rgb(213, 213, 213);
   border-radius: 5px;
   width: 100%;
+  margin-top: 3px;
+  box-sizing: border-box;
 }
 .right-title:hover {
   -webkit-transform: translate(0, -2px);
@@ -33,18 +52,86 @@
   box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.1);
 }
 .font {
-  font-size: 25px;
+  font-size: 1.4rem;
   color: deepskyblue;
   font-family: "STKaiti";
   font-weight: 600;
 }
-.input {
-  margin-top: 1em;
+
+/* 顶部留言字体 */
+.top {
+  position: relative;
+  width: 100%;
+  height: 180px;
+  background: aliceblue;
+  border: 3px dashed lightgray;
+  padding: 10px 0;
+  border-radius: 10px;
+  cursor: pointer;
+  overflow: hidden;
+  box-sizing: border-box;
 }
-.tip {
+.top div {
+  transition: 1.5s;
+  backface-visibility: hidden;
+}
+.top:hover .friendly{
+  transform: rotateY(0deg);
+}
+.top:hover .sub-title {
+  transform: rotateY(180deg);
+}
+.f-tip {
+  position: absolute;
+  right: 10px;
+  top: 0;
+  border-radius: 40%;
+  color: rgba(0, 0, 0, 0.65);
+  font-family: "Microsoft YaHei";
   font-size: 15px;
-  margin-right: 15px;
-  color: #6190e8;
+  font-weight: bold;
+  padding: 9px;
+  box-sizing: border-box;
+  width: 180px;
+  height: 50px;
+  background: #55E6C1;
+}
+.f-tip span:nth-child(1) {
+  color: #FC427B;
+}
+.sub-title {
+  position: absolute;
+  width: 100%;
+  font-family: "STHupo";
+  font-size: 22px;
+  color: darkturquoise;
+  text-align: center;
+}
+
+/* 申请友链 */
+.friendly {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  color: rgba(0, 0, 0, 0.65);
+  transform: rotateY(-180deg);
+  height: 100%;
+}
+.friendly_title {
+  font-size: 18px;
+}
+.friendly p {
+  margin: 8px 0;
+  white-space: wrap;
+  color: rgba(0, 0, 0, 0.45);
+}
+.friendly h3 {
+  margin: 10px 0;
+}
+
+/* 留言框 */
+.message-box {
+  margin-top: 1em;
 }
 .message-font {
   font-size: 20px;
@@ -52,117 +139,98 @@
   font-weight: 700;
   vertical-align: 10px;
 }
+.message-btn {
+  display: flex;
+  margin-top: 5px;
+  justify-content: flex-end;
+  align-items: center;
+}
+.tip {
+  font-size: 15px;
+  margin-right: 15px;
+  color: #6190e8;
+}
+.tip i {
+  font-size: 18px; 
+  vertical-align: text-bottom;
+}
+
+/* 留言列表 */
+.message-list {
+  font-weight: bold;
+  font-size: 17px;
+  margin: 10px 0 -10px 0;
+}
+
+/* 留言数量 */
+.message-num {
+  border-bottom: solid 1px #b2bec3;
+  padding: 5px 0;
+}
+.message-num strong {
+  color: royalblue;
+  font-size: 22px;
+  vertical-align: -2px;
+}
+
+/* 留言 */
 .comment {
-  margin-top: -10px;
+  padding: 15px 0;
+  border-bottom: solid 1px #b2bec3;
 }
-.comment .el-divider--horizontal {
-  margin: 10px 0;
+.comment:last-of-type {
+  border-bottom: 0px;
 }
-.comment:last-child {
-  margin-bottom: 25px;
+.info {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 15px;
+  font-weight: normal;
+  color: rgba(0, 0, 0, 0.65);
 }
-.comment:last-child .el-divider {
-  display: none;
-}
-.avatar {
-  display: inline-block;
-  position: relative;
+.author {
+  margin: 0 10px;
+  color: #409EFF
 }
 .avatar img {
   height: 40px;
   width: 40px;
   border-radius: 50%;
-  margin-bottom: 0px;
-}
-.author {
-  width: 100%;
-  display: inline;
-  margin-left: 10px;
-  color: rgba(0, 0, 0, 0.65);
-  font-size: 15px;
-}
-.comment-time {
-  vertical-align: 13px;
-  margin-left: 15px;
 }
 .comment-content {
-  display: block;
-  color: #555555;
-  /* margin-left: 55px; */
-  padding: 10px 15px
+  font-weight: normal;
+  box-sizing: border-box;
+  margin-left: 15px;
 }
 .comment-btn {
-  display: block;
-  margin-left: 55px;
-  float: right;
+  display: flex;
+  justify-content: flex-end;
 }
+.btn-group {
+  display: flex;
+  justify-content: space-evenly;
+}
+.comment-empty {
+  margin-top: 20px;
+  color: rgba(0,0,0,.45);
+  text-align: center
+}
+
+/* 分页 */
 .pagination {
-  float: right;
-  margin: 30px 0;
-}
-/* 申请友链 */
-.friendly {
-  width: 100%;
-  background: aliceblue;
-  text-align: center;
-  border: 3px dashed lightgray;
-  border-radius: 10px;
-  color: rgba(0, 0, 0, 0.65);
-
-}
-.friendly_title {
-  font-size: 18px;
-}
-.friendly p {
-  overflow: auto;
-  white-space: nowrap;
-  color: rgba(0, 0, 0, 0.45);
+  display: flex;
+  justify-content: flex-end;
+  margin: 30px 0 0 0;
 }
 
-
-
-@media (max-width: 1900px) {
-  .right {
-    right: 30px;
-  }
-}
-
-@media (max-width: 1700px) {
-  .right {
-    right: 15px;
-  }
-}
-
-@media (max-width: 1600px) {
-  .right {
-    right: 20px;
-  }
-  .right-title {
-    font-size: 15px;
-  }
-  .font {
-    font-size: 22px;
-  }
-}
-
-@media (max-width: 1500px) {
-  .right {
-    right: 10px;
-  }
-}
-
-@media (max-width: 1350px) {
-  .right-title {
-    font-size: 14px;
-  }
-  .font {
-    font-size: 20px;
-  }
-}
-
+/* 响应式适配 */
 @media (max-width: 1200px) {
+  .right, .line {
+    display: none;
+  }
   .center {
-    padding-right: 0px;
+    width: 100%;
   }
 }
 
@@ -175,6 +243,18 @@
   .message-font {
     font-size: 18px;
   }
+  .friendly_title {
+    font-size: 16px;
+  }
+  .friendly p {
+    font-size: 14px;
+  }
+  .f-tip {
+    font-size: 13px;
+    font-weight: 0;
+    width: 150px;
+    height: 50px;
+  }
 }
 
 @media (max-width: 450px) {
@@ -183,6 +263,12 @@
   }
   .comment-content {
     padding: 10px 0px 10px 0px;
+  }
+  .top {
+    height: 160px;
+  }
+  .friendly {
+    margin-top: -10px;
   }
 }
 
@@ -202,7 +288,21 @@
     width: 28px;
     height: 28px;
   }
-  .message-list h3 {
-    font-size: 17px;
+  .friendly_title {
+    font-size: 14px;
+  }
+  .friendly p {
+    font-size: 13px;
+  }
+  .f-tip {
+    border-radius: 30%;
+    top: -35px;
+    right: -22px;
+    font-size: 10px;
+    font-weight: 0;
+    width: 100px;
+    height: 85px;
+    padding-top: 28px;
+    padding-right: 28px;
   }
 }

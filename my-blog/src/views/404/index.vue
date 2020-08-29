@@ -7,7 +7,7 @@
       </div>
       <div class="title">Sorry, the page you visited does not exist.</div>
       <div class="btn">
-        <router-link to="/index"><el-button type="primary" @click="registerVisible = true">Back to Home</el-button></router-link>
+        <router-link to="/article"><el-button type="primary" @click="registerVisible = true">Back to Home</el-button></router-link>
       </div>
     </div>
   </div>

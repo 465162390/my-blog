@@ -100,6 +100,7 @@ export default {
       inputValue: "",
       showMark: false,
       value: "",
+      state: "false",  // 该状态用于判断用户修改完是否有提交保存
     };
   },
 
@@ -182,7 +183,7 @@ export default {
     },
 
     // 提交文章
-    submitArticle() {
+    async submitArticle() {
       // refs上的mdeditor里面的editor就是生成的富文本编辑器的实例
       // 将富文本编辑器的html源码保存到数据库中
       // getMarkdown() 获取markdown语法的内容， gerHtml() 获取编辑器html源码
@@ -194,26 +195,26 @@ export default {
       
       if(!isNull(this.article.title) && !isNull(this.article.content)) {  
         // 有id是修改文章，没有则是新增文章
+        let responseData;
         if(this.$route.params.id == undefined) {
-          addArticle(this.article).then( response => {
-            response.code == 200 ? this.$router.push("/admin") : "";
-            Message({
-              message: response.message,
-              type: response.type,
-              duration: 2000
-            });
+          await addArticle(this.article).then( response => {
+            responseData = response;
           })
         } else {
           this.article.id = this.$route.params.id
-          editArticle(this.article).then( response => {
-            Message({
-              message: response.message,
-              type: response.type,
-              duration: 2000
-            });
-            this.$router.push("/admin");
+          await editArticle(this.article).then( response => {
+            responseData = response;
           })
         }
+        Message({
+          message: responseData.message,
+          type: responseData.type,
+          duration: 2000
+        });
+        responseData.code == 200 ? setTimeout(() => {
+          this.state = "true";
+          this.$router.push("/admin/articleManage")
+        }, 1000) : "";
       } else {
         Message({
           message: "文章题目与文章内容都不能为空!",
@@ -227,6 +228,25 @@ export default {
     editPublic(status) {
       this.article.public = status;
     },
+  },
+  beforeRouteLeave (to, from , next) {
+    // 离开该页面前如没保存修改的内容，则提示用户
+    if(this.state == "true") {
+      next();
+    } else {
+      this.$confirm('文章尚未保存，是否保存修改的内容?', '文章尚未保存', {
+        confirmButtonText: '确定保存',
+        cancelButtonText: '放弃保存',
+        type: 'warning',
+        center: true,
+        distinguishCancelAndClose: true,
+      }).then(() => {
+        this.submitArticle();
+      }).catch( (action) => {
+        action == "cancel" ? next() : next(false);
+      });
+    }
+      
   }
 };
 </script>

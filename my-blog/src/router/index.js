@@ -22,6 +22,11 @@ export default new Router({
       name: '往事随风',
       component: () => import('@/views/home'),
     },
+    {
+      path: '/loginCallBack*',
+      name: '第三方登录',
+      component: () => import('@/views/callBack'),
+    },
     adminRouter,
     webRouter,
     // 404页面的路由必须放在最后

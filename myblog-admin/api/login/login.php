@@ -10,6 +10,7 @@ mysqli_query($link,'set names utf8 ');
 
     $sql = "select * from user where username='$username' and password='$password'";
     $result = mysqli_query($link, $sql);
+    $last_time = date("Y-m-d H:i:s");   // 用户最后一次登录时间
 
     if (mysqli_num_rows($result) == 1) {
         $row = mysqli_fetch_assoc($result);
@@ -18,7 +19,7 @@ mysqli_query($link,'set names utf8 ');
         $str = md5($row["name"].$row["username"].$date).$id;
         $token = base64_encode($str);  // 经过base64处理
         // 将token插入到数据库
-        $update_sql = "update user set token = '$token' where id = '$id'";
+        $update_sql = "update user set token = '$token', last_time='$last_time' where id = '$id'";
         mysqli_query($link, $update_sql);
 
         $status -> user = new stdClass();

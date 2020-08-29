@@ -68,7 +68,7 @@
 </template>
 
 <script>
-import key from '@/utils/weather'
+import { weather } from '@/utils/toolKeys'
 import { getNow } from '@/api/weather'
 import { getForecast } from '@/api/weather'
 import { getLiveStyle } from '@/api/weather'
@@ -79,7 +79,7 @@ export default {
   data () {
     return {
       search: {
-        key: key.weather_key,
+        key: weather.key,
         location: this.$store.state.ipInfo.city,
       },
       now: {},
@@ -136,13 +136,14 @@ export default {
   width: 100%;
   height: 480px;
   border-radius: 10px;
-  border: 0.1em solid rgb(213, 213, 213);
+  border: 0.1rem solid rgb(213, 213, 213);
   background-color: rgb(255, 255, 255);
   -webkit-transition: all 0.2s linear;
   transition: all 0.2s linear;
   color: darkslategrey;
   font-size: 15px;
   text-align: left;
+  box-sizing: border-box;
 }
 .weather:hover {
   -webkit-transform: translate(0, -2px);

@@ -9,6 +9,8 @@ mysqli_query($link,'set names utf8 ');
     isset($_POST["title"]) ? $title = $_POST["title"] : $title = "";
     isset($_POST["tag"]) ? $tag = $_POST["tag"] : $tag = "";
     isset($_POST["category"]) ? $category = $_POST["category"] : $category = "";
+    $role = $_POST["role"];
+
     $Array = array();  // 记录所有的文章信息
     $status = new stdClass();
 
@@ -42,13 +44,15 @@ mysqli_query($link,'set names utf8 ');
 
     // 所有查询条件都为空
     if( $title == "" && $tag == "" && $category == "" ) {
-        $sql = "select * from article where public = 'true'";
+      // $sql = "select * from article";
+      $role == "1" ? $sql = "select * from article" : $sql = "select * from article where public = 'true'";
     } else {
-        $sql = "select * from article where public = 'true' and ";
+	    // $sql = "select * from article where ";
+			$role == "1" ? $sql = "select * from article where " : $sql = "select * from article where public = 'true' and ";
 
-        $tag != "" ? $sql .= "id in(SELECT article_id from tag_links WHERE tag_id =  $tag) and " : $sql;
-        $category != "" ? $sql .= "id in(SELECT article_id from category_links WHERE category_id =  $category) and " : $sql;
-        $title != "" ? $sql .= "title Like '%". $title ."%'" : $sql = substr($sql,0,count($sql)-5);
+      $tag != "" ? $sql .= "id in(SELECT article_id from tag_links WHERE tag_id =  $tag) and " : $sql;
+      $category != "" ? $sql .= "id in(SELECT article_id from category_links WHERE category_id =  $category) and " : $sql;
+      $title != "" ? $sql .= "title Like '%". $title ."%'" : $sql = substr($sql,0,count($sql)-5);
     }
 
     $result = mysqli_query($link, $sql);

@@ -1,5 +1,5 @@
 import { Row,Col,Menu,Button,Select,MenuItem,Divider,Dialog,Drawer,DatePicker,Input,Submenu,Form,FormItem,Tag,Table,Pagination, TableColumn,Timeline,
-  TimelineItem,Card,Badge,Avatar,Rate,Popover,Option,Switch,Upload } from 'element-ui'
+  TimelineItem,Card,Badge,Avatar,Rate,Popover,Option,Switch,Upload,Tooltip,Notification,MessageBox,Confirm } from 'element-ui'
 
 const element = {
   // install 方法表示在 main.js 中，如果使用 Vue.use() 方法的话，则该方法默认会调用 install 方法,并把Vue传递过来
@@ -32,6 +32,10 @@ const element = {
     Vue.use(Option)
     Vue.use(Switch)
     Vue.use(Upload)
+    Vue.use(Tooltip)
+    Vue.prototype.$notify = Notification
+    Vue.prototype.$msgbox = MessageBox
+    Vue.prototype.$confirm = MessageBox.confirm
   }
 }
 

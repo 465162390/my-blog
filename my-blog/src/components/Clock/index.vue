@@ -70,7 +70,7 @@ p {
   border: 2px dashed rgb(213, 213, 213);
   border-radius: 10px;
   text-align: center;
-  width: 100%;
+  width: 246px;
   -webkit-transition: all 0.2s linear;
   transition: all 0.2s linear;
 }

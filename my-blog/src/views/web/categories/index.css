@@ -19,6 +19,10 @@
 }
 .el-tag {
   margin: 12px;
+  transition: 0.5s;
+}
+.el-tag:hover {
+  transform: scale(1.3);
 }
 .el-tag >>> .el-badge__content.is-fixed {
   top: -3px;

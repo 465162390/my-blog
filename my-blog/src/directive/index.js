@@ -15,7 +15,7 @@ Vue.directive('directory', {
   inserted:function (el, binding, vnode) { 
     let directory = el.querySelectorAll('h1,h2,h3,h4,h5,h6');
     directory.forEach((value) => {
-      value.id = titleFormat(value.innerText);
+      value.id = "id" + titleFormat(value.innerText);
     })
   },
 })

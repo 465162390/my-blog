@@ -1,11 +1,15 @@
 .center {
-  width: calc(100% - 300px);
+  width: calc(100% - 260px);
 }
 .right {
   position: fixed;
-  top: 93px;
-  right: 30px;
+  top: 70px;
+  right: 10px;
   width: 250px;
+  overflow-y: auto;
+}
+.right::-webkit-scrollbar {
+  display: none;
 }
 .article-header {
   text-align: center;
@@ -37,10 +41,14 @@
   text-overflow: ellipsis;
   color: #8590a6;
   font-size: 14px;
+  transition: 0.5s;
+  margin: 3px 3px 0 0;
 }
 .title li span:hover {
-  color: #40a9ff; 
-  background: #f0f2f5;
+  background-color: rgba(0, 0, 0, 0.05);
+  color: #3742fa;
+  border-radius: 6px;
+  box-shadow: 3px 4px #DCC6E0;
 } 
 ul {
   padding: 0;
@@ -152,7 +160,13 @@ a {
   background: #fff;
 }
 
-@media (max-width: 1279px) {
+/* 温馨提示 */
+.tips {
+  font-weight: bold;
+  color: #f8442c;
+}
+
+@media (max-width: 1200px) {
   .right {
     display: none;
   }

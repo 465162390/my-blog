@@ -1,47 +1,59 @@
-.line-height {
-  min-height: calc(100vh - 110px);
+/* 导航栏 */
+.navbar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 99;
 }
 .main {
-  /* margin-top: 50px; */
-  padding: 25px 0 40px 0;
-  width: 100%;
-  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+  top: 80px;
 }
+/* 左侧边栏 */
 .app-sidebar {
-  width: 100%;
-  /* background-color: white; */
-  display: flex;
-  flex-direction: column;
-  height: calc(100vh - 65px);
-  top: 0;
-  bottom: 0;
-  left: 0;
+  width: 235px;
+  position: fixed;
+  top: 80px;
+  border-right: solid 1px #dfe6e9;
+  height: calc(100% - 90px);
   text-align: center;
-  overflow-y: auto;
-  margin-top: 15px;
-}
-.app-main {
-  padding-left: 3px;
   overflow: auto;
-  height: calc(100vh - 110px);
-  margin-left: -25px;
 }
-@media (max-width: 1240px) {
+.app-sidebar::-webkit-scrollbar {
+  display: none;
+}
+/* 主要内容 */
+.app-main {
+  position: fixed;
+  right: 0;
+  top: 77px;
+  height: calc(100% - 90px);
+  width: calc(100% - 250px);
+  overflow: auto;
+  box-sizing: border-box;
+  padding-right: 15px;
+  padding-left: 10px;
+}
+.app-main::-webkit-scrollbar {
+  display: none;
+}
+
+@media (max-width: 850px) {
+  .app-sidebar {
+    display: none;
+  }
   .app-main {
-    padding: 0 28px 10px 15px;
+    width: 100%;
+    padding: 0 15px;
   }
 }
-@media (max-width: 991px) {
-  .main {
-    padding: 20px 0 0;
-  }
-  .app-main {
-    margin-left: 0;
-    padding: 0 20px;
-  }
-}
+
 @media (max-width: 450px) {
   .app-main {
-    padding: 0 8px;
+    width: 100%;
+    padding: 0 5px;
   }
 }

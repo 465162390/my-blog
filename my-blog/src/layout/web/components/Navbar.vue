@@ -1,7 +1,7 @@
 <!-- 顶部导航栏 -->
 <template>
-  <div class="navbar">
-    <el-row style="box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08); -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);">
+  <div>
+    <el-row style="box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);">
       <el-col :xs="0" :sm="4" :md="4" :lg="4" :xl="4" class="hidden-sm-and-down">
         <el-menu style="text-align: center" class="el-menu" mode="horizontal">
           <font>NGKAKUI的博客</font>
@@ -130,61 +130,20 @@
     </el-row>
 
     <!-- 登录框 -->
-    <el-dialog
-      title="登录"
-      :visible.sync="loginVisible"
-      width="30%"
-      :before-close="handleClose">
-      <el-form :model="loginUser" ref="loginForm" label-width="100px" class="login-form" size="mini">
-        <el-form-item label="用户名：" prop="username" required>
-          <el-input v-model.trim="loginUser.username" placeholder="username" clearable></el-input>
-        </el-form-item>
-        <el-form-item label="密码：" prop="password" required>
-          <el-input type="password" v-model.trim="loginUser.password" placeholder="password" @keyup.enter.native="login" clearable></el-input>
-        </el-form-item>
-      </el-form>
-      <span slot="footer" class="dialog-footer login-btn">
-        <el-button type="primary" class="login-btn" @click="login">确 定</el-button>
-        <el-button class="login-btn" @click="loginVisible = false">取 消</el-button>
-      </span>
-    </el-dialog>
+    <login-form :visible="loginVisible" @changeVisible="changeVisible" />
 
     <!-- 注册框 -->
-    <el-dialog
-      title="注册"
-      :visible.sync="registerVisible"
-      width="30%"
-      :before-close="handleClose">
-      <el-form :model="registerUser" ref="registerForm" label-width="100px" class="login-form" size="mini">
-        <el-form-item label="名称：" prop="name" required>
-          <el-input v-model.trim="registerUser.name" placeholder="name" clearable></el-input>
-        </el-form-item>
-        <el-form-item label="用户名：" prop="username" required>
-          <el-input v-model.trim="registerUser.username" placeholder="username" clearable></el-input>
-        </el-form-item>
-        <el-form-item label="密码：" prop="password" required>
-          <el-input type="password" v-model.trim="registerUser.password" placeholder="password" clearable></el-input>
-        </el-form-item>
-        <el-form-item label="确认密码：" prop="confirmpwd" required>
-          <el-input type="password" v-model.trim="registerUser.confirmpwd" placeholder="confirm password" @keyup.enter.native="register" clearable></el-input>
-        </el-form-item>
-      </el-form>
-      <span slot="footer" class="dialog-footer login-btn">
-        <el-button type="primary" class="login-btn" @click="register">确 定</el-button>
-        <el-button class="login-btn" @click="registerVisible = false">取 消</el-button>
-      </span>
-    </el-dialog>
+    <register-form :visible="registerVisible" @changeVisible="changeVisible" type="registerUser" />
 
   </div>
 </template>
 
 <script>
-import { fetchArticle } from "@/api/article";
-import { login } from "@/api/user";
-import { logout } from "@/api/user";
-import { register } from "@/api/user";
-import { Message } from "element-ui";
-import { isNullObject } from "@/utils/vaildata";
+import { fetchArticle } from "@/api/article"
+import { logout } from "@/api/user"
+import { Message } from "element-ui"
+import RegisterForm from "@/components/RegisterForm"
+import LoginForm from "@/components/LoginForm"
 
 export default {
   name: "Navbar",
@@ -192,19 +151,6 @@ export default {
     return {
       loginVisible: false,
       registerVisible: false,
-      // 登录
-      loginUser: {
-        username: "",
-        password: "",
-      },
-      // 注册
-      registerUser: {
-        name: "",
-        username: "",
-        password: "",
-        confirmpwd: "",
-        role: "0",
-      },
       search: {
         title: "",
         page: 1,
@@ -213,6 +159,7 @@ export default {
       isCollapse: true,
     };
   },
+
   methods: {
     // 退出登录
     logout() {
@@ -230,83 +177,23 @@ export default {
       }
     },
 
-    // 登录
-    login() {
-      if ( !isNullObject(this.loginUser) ) {
-        login(this.loginUser).then(response => {
-          response.code == 200 ? (
-            this.loginVisible = false,
-            this.$refs.loginForm.resetFields(),
-            Message({
-              type: response.type,
-              message: response.message + "欢迎你，" + response.user.name,
-              duration: 2000,
-            }),
-            window.sessionStorage.setItem("user", JSON.stringify(response.user)),
-            this.$store.commit("changeInfo", response.user)
-          ) : 
-          Message({
-            type: response.type,
-            message: response.message,
-            duration: 2000,
-          });
-        })
-      } else {
-        Message({
-          message: "账号和密码不能为空!",
-          type: "error",
-          duration: 2000,
-        })
-      }
-    },
-
-    // 注册
-    register() {
-      // 必填项是否为空
-      if ( !isNullObject(this.registerUser) ) {
-        if(this.registerUser.password == this.registerUser.confirmpwd) {
-          delete this.registerUser.confirmpwd;
-          register(this.registerUser).then(response => {
-            // 清空输入框
-            response.code == 200 ? (this.registerVisible = false, this.$refs.registerForm.resetFields()) : "";
-            Message({
-              type: response.type,
-              message: response.message,
-              duration: 2000,
-            })
-          })
-        } else {
-          Message({
-            type: "error",
-            message: "两次密码输入不正确，请重新输入!",
-            duration: 2000,
-          })
-        }
-      } else {
-        Message({
-          duration: 2000,
-          message: "必填项不能为空!",
-          type: "error"
-        })
-      };
-    },
-
-    handleClose(visible) {
-      this.loginVisible = false;
-      this.registerVisible = false;
-    },
+    // 改变注册框的visible值
+    changeVisible(visible) {
+      this.registerVisible = visible;
+      this.loginVisible = visible;
+    }
   },
 
-  created() {}
+  created() {},
+
+  components: {
+    RegisterForm,
+    LoginForm,
+  },
 };
 </script>
 
 <style scoped>
-.navbar {
-  left: 0;
-  right: 0;
-  top: 0;
-}
 .el-menu {
   z-index: 99;
   padding: 0;
@@ -373,19 +260,6 @@ form {
   display: none;
 }
 
-/** 登录框按钮 **/
-.login-btn {
-  display: block;
-  margin-left: 0; 
-  width: 100%;
-}
-.login-btn:nth-child(2) {
-  margin-top: 10px;
-}
-.login-form {
-  width: 80%;
-}
-
 @media (max-width: 1199px) {
   .searchform {
     display: none;
@@ -405,7 +279,6 @@ form {
   .mobile-title {
     font-size: 20px;
   }
-
 }
 
 @media (max-width: 450px) {
@@ -414,47 +287,6 @@ form {
   }
   .el-dialog {
     width: 95% ;
-  }
-  .el-dialog__body {
-    padding: 20px 0px;
-  }
-}
-</style>
-
-<style>
-/** 登录框 **/
-.el-dialog__header {
-  padding: 20px 20px 20px;
-  border-bottom: 1px solid #e8e8e8;
-}
-.el-dialog__body {
-  border-bottom: 1px solid #e8e8e8;
-}
-
-@media (max-width: 1300px) {
-  .el-dialog {
-    width: 35% !important;
-  }
-}
-
-@media (max-width: 1000px) { 
-  .el-dialog {
-    width: 55% !important;
-  }
-}
-
-@media (max-width: 768px) {
-  .el-dialog {
-    width: 65% !important;
-  }
-  .el-dialog__body {
-    padding: 20px 0px;
-  }
-}
-
-@media (max-width: 450px) {
-  .el-dialog {
-    width: 95% !important;
   }
   .el-dialog__body {
     padding: 20px 0px;

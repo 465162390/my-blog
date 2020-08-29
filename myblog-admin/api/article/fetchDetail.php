@@ -3,6 +3,7 @@
     require_once("../config/config.php");
     mysqli_query($link,'set names utf8 ');
 
+    isset($_POST["role"]) != "" ? $role = $_POST["role"] : $role = "undefined";
     $id = $_POST["id"];
     $status = new stdClass();
 
@@ -36,6 +37,7 @@
         return $arr;
     }
 
+    // 查询当前文章
     $sql = "select * from article where id='$id'";
     $result = mysqli_query($link, $sql);
 
@@ -49,12 +51,14 @@
         // 文章评论
         $row["comments"] = s_comment($link, $row["id"]);
 
-        // 文章浏览数 +1，并且将浏览数更新到数据库
-        $row["viewCount"] += 1;
-        $viewCount = $row["viewCount"];
-        $update_sql = "update article set viewCount= '$viewCount' where id = '$id'";
-        mysqli_query($link, $update_sql);
-
+        // 如果浏览者不是博主用户，文章浏览数 +1，并且将浏览数更新到数据库
+        if($role != 1) {
+            $row["viewCount"] += 1;
+            $viewCount = $row["viewCount"];
+            $update_sql = "update article set viewCount= '$viewCount' where id = '$id'";
+            mysqli_query($link, $update_sql);
+        }
+        
         $status -> code = 200;
         $status -> data = $row;
         $status -> message = "success";

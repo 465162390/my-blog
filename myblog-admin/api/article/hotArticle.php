@@ -6,8 +6,12 @@ mysqli_query($link,'set names utf8 ');
 
     $array = [];
     $status = new stdClass();
+    $role = $_POST["role"];
 
-    $sql = "select id, title from article where public='true' ORDER BY viewCount limit 0,5";
+		$role == "1" ? $sql = "select id, title, public from article ORDER BY viewCount limit 0,5"
+    	:	$sql = "select id, title, public from article where public = 'true' ORDER BY viewCount limit 0,5";
+
+    // $sql = "select id, title, public from article ORDER BY viewCount limit 0,5";
     $result = mysqli_query($link, $sql);
 
     if ($result) {

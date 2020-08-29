@@ -16,7 +16,7 @@ export function isNullObject(obj) {
   }
 }
 
-// 将文章标题前后空格清楚, / 转换为"", " " 空格转换为 -
+// 将文章标题前后空格清除, / 转换为"", " " 空格转换为 -
 export function titleFormat(str) {
   str = str.trim();
   str = str.replace(/\//g, "");
@@ -28,7 +28,8 @@ export function titleFormat(str) {
 export function timeFormatter(format) {
   let myDate = new Date();  
   let year = myDate.getFullYear();   //获取完整的年份(4位,1970-????)  
-  let month = (myDate.getMonth() < 10 ? "0" + myDate.getMonth() : myDate.getMonth()) + 1;    // 获取当前月份(0-11,0代表1月) 
+  let month = myDate.getMonth() + 1;    // 获取当前月份(0-11, 0代表1月) 
+  month < 10 ? month = "0" + month : month;
   let day = myDate.getDate() < 10 ? "0" + myDate.getDate() : myDate.getDate();    // 获取当前日(1-31) 
   let hours = myDate.getHours() < 10 ? "0" + myDate.getHours() : myDate.getHours();    // 获取当前小时数(0-23)  
   let minutes = myDate.getMinutes() < 10 ? "0" + myDate.getMinutes() : myDate.getMinutes();  // 获取当前分钟数(0-59)  

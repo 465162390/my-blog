@@ -8,12 +8,6 @@
           <!-- 时间 -->
           <el-date-picker style="width: 150px;" v-model="search.time" type="month" value-format="yyyy-MM" placeholder="月份归档" @change="onSearch"></el-date-picker>
 
-          <!-- 标签 -->
-          <!-- <el-select style="margin-left: 20px;" v-model="value" placeholder="请选择标签">
-            <el-option v-for="tag in tags" :key="tag.id" :label="tag.name" :value="tag.name">
-              <el-tag style="float: left;" size="mini" effect="light" :hit="true" :key="tag.id">{{tag.name}}</el-tag>
-            </el-option>
-          </el-select> -->
         </div>
 
         <el-divider></el-divider>
@@ -25,7 +19,16 @@
           </el-timeline-item>
           <el-timeline-item v-for="article in articles" :key="article.id" :timestamp="article.createdAt" placement="top" :type="type[Math.floor(Math.random()*5 + 1)]">
             <el-card>
-              <span><svg viewBox="0 0 1024 1024" width="20" height="20"><path d="M856 952H168V104h545.94L856 246.06z m-640-48h592V265.94L694.06 152H216z" fill="#d81e06"></path><path d="M656 103.79V304h200zM704 256V152l104 104zM283.19 488h457.63v48H283.19zM283.19 323h288v48h-288zM283.19 653h457.63v48H283.19z" fill="#d81e06"></path></svg></span>
+              <span>
+                <svg v-if="article.public==false" style="vertical-align: -1px;" t="1582184110620" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1161" width="20" height="20">
+                  <path d="M829.6 960.6h-634c-35.9 0-65.8-23.9-65.8-65.8V434.2c0-35.9 29.9-65.8 65.8-65.8h634c35.9 0 65.8 29.9 65.8 65.8v460.5c6 41.9-23.9 65.9-65.8 65.9z m-634-532.3c-5.9 0-5.9 5.9 0 0l-6 466.5c0 6 0 6 6 6h634c6 0 6 0 6-6V434.2c0-6 0-6-6-6h-634z" p-id="1162" fill="#2c2c2c"></path>
+                  <path d="M590.4 589.8c0-41.9-41.9-77.8-77.8-77.8-41.9 0-71.8 41.9-71.8 77.8 0 29.9 17.9 59.8 47.8 65.8v107.7c0 12 6 17.9 17.9 17.9h23.9c12 0 17.9-6 17.9-17.9V655.5c24.1-5.9 42.1-35.8 42.1-65.7zM763.8 392.4H704v-89.7c0-101.7-83.7-179.4-179.4-179.4-101.7 0-179.4 83.7-179.4 179.4v89.7h-59.8v-89.7c0-131.6 107.7-239.2 239.2-239.2s239.2 107.7 239.2 239.2v89.7z" p-id="1163" fill="#515151"></path>
+                </svg>
+                <svg viewBox="0 0 1024 1024" width="20" height="20">
+                  <path d="M856 952H168V104h545.94L856 246.06z m-640-48h592V265.94L694.06 152H216z" fill="#d81e06"></path>
+                  <path d="M656 103.79V304h200zM704 256V152l104 104zM283.19 488h457.63v48H283.19zM283.19 323h288v48h-288zM283.19 653h457.63v48H283.19z" fill="#d81e06"></path>
+                </svg>
+              </span>
               <router-link :to="'/article/'+ article.id"><span class="font">{{article.title}}</span></router-link>
             </el-card>
           </el-timeline-item>
@@ -49,32 +52,6 @@ export default {
   data() {
     return {
       value: "",
-      tags: [
-        {
-          id: 1,
-          name: "JavaScript"
-        },
-        {
-          id: 2,
-          name: "Vue.js"
-        },
-        {
-          id: 3,
-          name: "HTML"
-        },
-        {
-          id: 4,
-          name: "CSS"
-        },
-        {
-          id: 5,
-          name: "作用域"
-        },
-        {
-          id: 6,
-          name: "闭包"
-        },
-      ],
       type: ["primary ", "success", "info", "warning", "danger"],
       articles: [],
       search: {
@@ -99,6 +76,8 @@ export default {
   methods: {
     // 查找文章
     onSearch() {
+      this.$store.state.user.role != undefined ? this.search.role = this.$store.state.user.role 
+        : this.search.role = "0"
       fetch(this.search).then(response => {
         this.articles = response.data;
         this.total = response.total;

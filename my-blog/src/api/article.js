@@ -50,3 +50,7 @@ export function fetchHotArticle(params) {
   return request.post('/article/hotArticle.php', params)
 }
 
+// 文章点赞
+export function addLike(params) {
+  return request.post('/article/addLike.php', params)
+}

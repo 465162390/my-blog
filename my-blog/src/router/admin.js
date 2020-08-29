@@ -3,9 +3,17 @@ import Layout from '@/Layout/admin'
 
 export default {
   path: '/admin',
-  redirect: '/admin/articleManage',
+  redirect: '/admin/data',
   component: Layout,
   children: [
+    {
+      path: '/admin/data',
+      name: '数据展示',
+      meta: {
+        requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录的
+      },
+      component: () => import('@/views/admin/home'),
+    },
     {
       path: '/admin/articleManage',
       name: '文章管理',

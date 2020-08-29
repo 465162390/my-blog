@@ -1,5 +1,5 @@
 .main {
-  background: url("/static/img/bg.jpg") no-repeat;
+  background: url("/static/img/bg1.jpg") no-repeat;
   background-size: 100% 100%;
   width: 100%;
   height: 100%;
@@ -18,26 +18,67 @@
   font-weight: 600;
   color: dodgerblue;
   letter-spacing: 3px;
+  text-shadow: 5px 5px rgba(50,9,238, 0.22);
   font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  transition: 1s;
+  cursor: pointer;
 }
+.title strong {
+  transition: 1s;
+  display: inline-block;
+}
+.title:hover strong:nth-child(1) {
+  transform: rotateZ(-15deg) translate3d(-50px, -20px, 0px) scale(1.1);
+}
+.title:hover strong:nth-child(2) {
+  transform: rotateZ(15deg) translate3d(50px, 20px, 0px) scale(0.8);
+}
+
 .quotes {
   margin: 30px 0; 
   display: block;
   font-size: 30px;
   letter-spacing: 10px;
+  transition: 0.8s;
+  cursor: pointer;
+}
+.quotes:hover {
+  transform: scale(1.2, 1.2) translate3d(0, 15px, 0px);
 }
 .el-button.is-round {
   width: 120px;
   height: 50px;
+  transition: 0.8s;
+}
+.el-button.is-round:hover {
+  border: solid 1px #0652DD;
+  transform: scale(1.2, 1.2);
 }
 .el-button span {
   font-size: 20px;
 }
+a {
+  text-decoration: none;
+  color: #b2bac2
+}
+.footer {
+  clear: both;
+  text-align: center;
+  width: 100%;
+  color: #b2bac2;
+  font-size: 13px;
+  position: fixed;
+  bottom: 0;
+}
 
 /* 云特效 */
 @keyframes posterDrop2 {
-  from { background-position: 0 0; }
-  to { background-position: 500% 0; }
+  from { 
+    background-position: 0 0;
+  }
+  to {
+    background-position: 500% 0;
+  }
 }
 .cloud {
   background: url("/static/img/cloud.png") repeat-x 0px 0px;
@@ -47,12 +88,16 @@
   top: 0;
   left: 0;
   background-size: cover;
-  animation: posterDrop2 150s linear infinite;
+  animation: posterDrop2 60s linear infinite alternate;
 }
 
-@keyframes posterDrop1 {
-  from { background-position: 0 0; }
-  to { background-position: 800% 0; }
+/* @keyframes posterDrop1 {
+  from {
+     background-position: 0 0;
+  }
+  to { 
+    background-position: 800% 0;
+  }
 }
 .cloud2 {
   background: url("/static/img/cloud2.png") repeat-x 0px 0px;
@@ -63,7 +108,7 @@
   left: 0;
   background-size: cover;
   animation: posterDrop1 250s linear infinite;
-}
+} */
 
 /* 云特效 */
 
