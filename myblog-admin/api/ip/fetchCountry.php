@@ -45,7 +45,7 @@ $ip = getip();
 $status = new stdClass();
 
 // 调用高德地图api，根据IP地址定位
-$url = "https://restapi.amap.com/v3/ip?output=JSON&key=4a9f8b65c464a611822dfc7fbe7c9dfa&ip=".$ip;
+$url = "https://restapi.amap.com/v3/ip?output=JSON&key=xxx&ip=".$ip;
 $data = json_decode(httpget($url));
 // 如果ip地址获取不到省市的信息，就默认为广东省广州市
 $data -> province == [] ? $data->province="广东省" : "";
