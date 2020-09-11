@@ -7,7 +7,6 @@
         <div class="search">
           <!-- 时间 -->
           <el-date-picker style="width: 150px;" v-model="search.time" type="month" value-format="yyyy-MM" placeholder="月份归档" @change="onSearch"></el-date-picker>
-
         </div>
 
         <el-divider></el-divider>

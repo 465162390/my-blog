@@ -187,7 +187,7 @@
     </div>
 
     <!-- 右边边栏 -->
-    <div class="right" :style="clientHeight">
+    <div class="right">
       <!-- 时钟 -->
       <!-- <clock/> -->
       <div v-if="directorys && directorys.length != 0">
@@ -278,11 +278,6 @@ export default {
   },
 
   computed: {
-    // 浏览器窗口高度
-    clientHeight() {
-      return `height:${document.documentElement.clientHeight - 110}px`
-    },
-
     // 点赞按钮状态
     disabled() {
       // 当前时间戳

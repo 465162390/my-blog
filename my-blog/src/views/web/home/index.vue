@@ -96,7 +96,7 @@
     </div>
 
     <!-- 右边文章列表 -->
-    <div class="right" :style="clientHeight">
+    <div class="right">
       <!-- 时钟 -->
       <clock/>
 
@@ -267,13 +267,6 @@ export default {
     Clock,
     RegisterForm,
     BindForm
-  },
-
-  computed: {
-    // 浏览器窗口高度
-    clientHeight() {
-      return `height:${document.documentElement.clientHeight - 110}px`
-    },
   },
 
   methods: {

@@ -3,10 +3,11 @@
 }
 .right {
   position: fixed;
-  top: 70px;
+  bottom: 0px;
   right: 10px;
   width: 250px;
   overflow-y: auto;
+  height: calc(100vh - 90px);
 }
 .right::-webkit-scrollbar {
   display: none;

@@ -63,7 +63,7 @@ p {
   padding: 0;
 }
 .clock {
-  margin: 25px 0 50px 0; 
+  margin: 5px 0 20px 0; 
   font-family: 'Share Tech Mono', monospace;
   font-weight: bold;
   color: rgba(0, 0, 0, 0.6);
