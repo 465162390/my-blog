@@ -4,7 +4,7 @@
     <el-row style="box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);">
       <el-col :xs="0" :sm="4" :md="4" :lg="4" :xl="4" class="hidden-sm-and-down">
         <el-menu style="text-align: center" class="el-menu" mode="horizontal">
-          <font>NGKAKUI的博客</font>
+          <font class="blog-name">NGKAKUI's BLOG</font>
         </el-menu>
       </el-col>
       
@@ -93,6 +93,7 @@
                 clearable
                 @blur="fetchArticle"
                 @keyup.enter.native="fetchArticle"
+                class="search-input"
               ></el-input>
             </el-form-item>
           </el-form>
@@ -247,6 +248,11 @@ form {
 .mobile-text {
   font-size: 14px;
   vertical-align: baseline;
+}
+.blog-name {
+  padding-top: 5px;
+  border-top: solid 7px #0984e3;
+  border-radius: 50%;
 }
 
 /** 移动端导航栏样式 **/

@@ -10,7 +10,8 @@
       <el-col :span="24" style="font-size: 14px; color: #555">
         <el-divider content-position="left">博客简介</el-divider>
         <p>本博客使用的技术为： Vue.js + Element-UI + PHP + MySql</p>
-        <!-- <p>源码地址为 <a href="https://gitlab.com/465162390">gitlab</a>，仅供参考！</p> -->
+        <p>源码地址为 <a href="https://gitlab.com/465162390/my-blog" target="blank">gitlab</a>，
+        <a href="https://github.com/465162390/my-blog" target="blank">github</a> 仅供参考！</p>
       </el-col>
       <!-- 个人简介 -->
       <el-col :span="24">
